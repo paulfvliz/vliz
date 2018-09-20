@@ -10,6 +10,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,10 +21,11 @@ import feature.Rectangle;
 
 public class Util {
 	private static final Logger LOGGER = Logger.getLogger(Util.class.getName());
+	private static int READ_TIMEOUT = (int)Duration.ofMinutes(5).toMillis();
 
 	public static void store(String data, Path p, String directory) {
 		try {
-			Path cache = FileSystems.getDefault().getPath(directory);
+			Path cache = FileSystems.getDefault().getPath(normalizePath(directory));
 			if (!Files.exists(cache) || !Files.isDirectory(cache)) {
 				Files.createDirectory(cache);
 				LOGGER.log(Level.FINE, "Caching directory created ");
@@ -35,6 +37,10 @@ public class Util {
 		} catch (IOException io) {
 			throw new FatalException("The file cannot be saved", io);
 		}
+	}
+
+	public static String normalizePath(String path) {
+		return path.replaceAll(":", "");
 	}
 
 	public static InputStream fetchFrom(String url) {
@@ -50,8 +56,8 @@ public class Util {
 
 		try {
 			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-			connection.setReadTimeout(20000);
-			connection.setConnectTimeout(20000);
+			connection.setReadTimeout(READ_TIMEOUT);
+			connection.setConnectTimeout(READ_TIMEOUT);
 			connection.setRequestMethod("GET");
 			connection.setDoInput(true);
 			connection.connect();

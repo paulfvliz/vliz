@@ -34,7 +34,7 @@ public class BathymetryDAO {
 		String id = bbox.getMinLat() + "-" + bbox.getMinLon() + "-" + bbox.getMaxLat() + "-" + bbox.getMaxLon();
 		String pathname = cache + "/" + statPattern.replace("{id}", id);
 
-		Path p = FileSystems.getDefault().getPath(pathname);
+		Path p = FileSystems.getDefault().getPath(Util.normalizePath(pathname));
 		if (!Files.exists(p)) {
 			String lineString = "";
 			SortedSet<Double> mins = new TreeSet<>(); // stores the minimum values

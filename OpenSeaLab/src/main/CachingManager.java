@@ -114,7 +114,7 @@ public class CachingManager {
 	 * @return a {@link Path}
 	 */
 	public Path getPath(Rectangle bbox, String type) {
-		return FileSystems.getDefault().getPath(cache + "/" + pattern.replace("{id}", getId(bbox, type)));
+		return FileSystems.getDefault().getPath(Util.normalizePath(cache + "/" + pattern.replace("{id}", getId(bbox, type))));
 	}
 
 	private String getId(Rectangle bbox, String type) {
