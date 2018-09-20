@@ -34,12 +34,12 @@ public class Main {
 			if(args.length != 0 && args[0].equals("--populate-cache")) {
 				appContext.loadProperties("prod.properties");
 				
-				List<String> knownLayers = 
+				List<String> knownLayers =
 						Arrays.asList(appContext.getProperty("known-layers").split(";"));
 				
 				
 				Runnable lastAction = new Runnable() {
-					
+
 					@Override
 					public void run() {
 						System.out.println("All done, exiting now");
@@ -97,7 +97,7 @@ public class Main {
 			public void run() {
 				try {
 					System.out.println("Running cache population for "+layerName);
-					populateCache(appContext, "geology", new Rectangle(appContext, "geology"),
+					populateCache(appContext, layerName, new Rectangle(appContext, layerName),
 							appContext.getProperty(layerName + "-default-type"), appContext.getProperty(layerName + "-default-dividor"), whenDone);
 				} catch (IOException e) {
 					e.printStackTrace();
