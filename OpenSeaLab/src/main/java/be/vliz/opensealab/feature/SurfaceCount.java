@@ -2,6 +2,7 @@ package be.vliz.opensealab.feature;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 public class SurfaceCount implements Serializable{
 	
@@ -43,12 +44,12 @@ public class SurfaceCount implements Serializable{
 			// No real area to count!
 			return totals;
 		}
-		
-		for (String k : parts.keySet()) {
-			if("points".equals(k)) {
-				totals.put(k, parts.get(k));
+
+		for(Map.Entry<String, Double> e : parts.entrySet()) {
+			if("points".equals(e.getKey())) {
+				totals.put(e.getKey(), e.getValue());
 			}else {
-				totals.put(k, 100 * parts.get(k) / total);
+				totals.put(e.getKey(), 100 * e.getValue() / total);
 			}
 		}
 		return totals;
