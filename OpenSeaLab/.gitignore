@@ -8,3 +8,4 @@
 .settings
 test.js
 target
+dependency-reduced-pom.xml
