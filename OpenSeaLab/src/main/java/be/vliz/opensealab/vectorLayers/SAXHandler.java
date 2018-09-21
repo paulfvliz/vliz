@@ -18,8 +18,6 @@ public class SAXHandler extends DefaultHandler {
 	private boolean isFeature;
 	private boolean multi;
 	private boolean polygon;
-	private boolean point;
-	private boolean lineString;
 
 	private String element;
 	private StringBuilder sb;
@@ -45,15 +43,6 @@ public class SAXHandler extends DefaultHandler {
 			polygon = true;
 			return;
 		}
-		if (element.equals("Point")) {
-			point = true;
-			return;
-		}
-		if (element.equals("LineString")) {
-			lineString = true;
-			return;
-		}
-
 	}
 
 	@Override
@@ -92,7 +81,6 @@ public class SAXHandler extends DefaultHandler {
 				}
 				feature.setGeometry(GeometryFactory.newPoint(s));
 			}
-			point = false;
 			return;
 		}
 
@@ -102,7 +90,6 @@ public class SAXHandler extends DefaultHandler {
 			} else {
 				feature.setGeometry(GeometryFactory.newLineString(sb.toString()));
 			}
-			lineString = false;
 			return;
 		}
 
