@@ -142,7 +142,7 @@ public class PiecedCachingManager implements LayerProvider {
 						SurfaceCount stats = toCache.calculateTotals(dividingProperty);
 						statisticsCaching.store(stats, s, type);
 
-						synchronized (threads) {
+						synchronized (whenDone) {
 							squaresDone++;
 							System.out.printf("\r%" + squaresFormat + "d/%d", squaresDone, squaresGoal);
 							if (squaresDone == squaresGoal && whenDone != null) {
