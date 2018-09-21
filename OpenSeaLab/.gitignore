@@ -3,3 +3,7 @@
 /log/
 *.iml
 .idea
+.project
+.classpath
+.settings
+test.js
