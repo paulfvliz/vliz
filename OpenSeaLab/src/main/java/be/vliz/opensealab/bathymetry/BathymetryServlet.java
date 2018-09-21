@@ -1,4 +1,4 @@
-package bathymetry;
+package be.vliz.opensealab.bathymetry;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.jetty.servlet.DefaultServlet;
 
-import exceptions.BizzException;
-import exceptions.FatalException;
-import main.Util;
+import be.vliz.opensealab.exceptions.BizzException;
+import be.vliz.opensealab.exceptions.FatalException;
+import be.vliz.opensealab.main.Util;
 
 public class BathymetryServlet extends DefaultServlet {
 	private static final Logger LOGGER = Logger.getLogger(BathymetryServlet.class.getName());

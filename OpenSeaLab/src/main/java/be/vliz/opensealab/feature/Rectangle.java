@@ -1,6 +1,6 @@
-package feature;
+package be.vliz.opensealab.feature;
 
-import main.AppContext;
+import be.vliz.opensealab.main.AppContext;
 
 public class Rectangle extends Geometry {
 

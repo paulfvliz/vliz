@@ -1,4 +1,4 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class FeatureCollectionBuilder {
 	private final String geoJSON;
 
 	/**
-	 * Constructs a vectorLayers collection builder for the string parameter.
+	 * Constructs a be.vliz.opensealab.vectorLayers collection builder for the string parameter.
 	 * 
 	 * @param geoJSON
 	 *            a json string that has geojson specs.
@@ -20,7 +20,7 @@ public class FeatureCollectionBuilder {
 	}
 
 	/**
-	 * Creates a vectorLayers collection from the attribute "geoJSON".
+	 * Creates a be.vliz.opensealab.vectorLayers collection from the attribute "geoJSON".
 	 * 
 	 * @return {@link FeatureCollection}
 	 */
@@ -46,10 +46,10 @@ public class FeatureCollectionBuilder {
 	}
 
 	/**
-	 * Creates a vectorLayers. The parameter should respect a geojson vectorLayers specs.
+	 * Creates a be.vliz.opensealab.vectorLayers. The parameter should respect a geojson be.vliz.opensealab.vectorLayers specs.
 	 * 
 	 * @param feature
-	 *            a map that contains vectorLayers data
+	 *            a map that contains be.vliz.opensealab.vectorLayers data
 	 * @return {@link Feature}
 	 */
 	@SuppressWarnings("unchecked")

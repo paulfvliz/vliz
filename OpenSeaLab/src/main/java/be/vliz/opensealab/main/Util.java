@@ -1,4 +1,4 @@
-package main;
+package be.vliz.opensealab.main;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,8 +16,8 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
-import exceptions.FatalException;
-import feature.Rectangle;
+import be.vliz.opensealab.exceptions.FatalException;
+import be.vliz.opensealab.feature.Rectangle;
 
 public class Util {
 	private static final Logger LOGGER = Logger.getLogger(Util.class.getName());

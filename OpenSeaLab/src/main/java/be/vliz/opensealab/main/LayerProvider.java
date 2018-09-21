@@ -1,8 +1,8 @@
-package main;
+package be.vliz.opensealab.main;
 
-import feature.FeatureCollection;
-import feature.Rectangle;
-import feature.SurfaceCount;
+import be.vliz.opensealab.feature.FeatureCollection;
+import be.vliz.opensealab.feature.Rectangle;
+import be.vliz.opensealab.feature.SurfaceCount;
 
 public interface LayerProvider {
 

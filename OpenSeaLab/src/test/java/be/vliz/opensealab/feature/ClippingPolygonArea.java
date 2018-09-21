@@ -1,10 +1,6 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 import org.junit.Test;
-
-import feature.Point;
-import feature.Polygon;
-import feature.Rectangle;
 
 public class ClippingPolygonArea {
 

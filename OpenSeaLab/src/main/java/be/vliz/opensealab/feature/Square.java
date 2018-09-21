@@ -1,4 +1,4 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 public class Square extends Rectangle{
 	

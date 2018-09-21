@@ -1,4 +1,4 @@
-package main;
+package be.vliz.opensealab.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import exceptions.FatalException;
-import feature.Rectangle;
+import be.vliz.opensealab.exceptions.FatalException;
+import be.vliz.opensealab.feature.Rectangle;
 
 public class CachingManager {
 	private static final Logger LOGGER = Logger.getLogger(CachingManager.class.getName());

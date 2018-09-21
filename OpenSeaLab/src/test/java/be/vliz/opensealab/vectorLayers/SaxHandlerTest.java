@@ -1,4 +1,4 @@
-package vectorLayers;
+package be.vliz.opensealab.vectorLayers;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;

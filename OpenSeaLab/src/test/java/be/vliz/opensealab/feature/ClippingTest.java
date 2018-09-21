@@ -1,12 +1,8 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-
-import feature.Point;
-import feature.Polygon;
-import feature.Rectangle;
 
 public class ClippingTest {
 	

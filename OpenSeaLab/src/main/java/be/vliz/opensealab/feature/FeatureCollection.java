@@ -1,4 +1,4 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -102,15 +102,15 @@ public class FeatureCollection implements Serializable {
 	/*
 	 * public void deduplicate() { List<Feature> deduped = new ArrayList<>();
 	 * List<Feature> toRemove = new ArrayList<>(); for (Iterator<Feature> iterator =
-	 * features.iterator(); iterator.hasNext();) { Feature vectorLayers =
+	 * features.iterator(); iterator.hasNext();) { Feature be.vliz.opensealab.vectorLayers =
 	 * iterator.next();
 	 * 
-	 * if (!vectorLayers.getGeometry().getType().equals("MultiPolygon")) { continue; }
+	 * if (!be.vliz.opensealab.vectorLayers.getGeometry().getType().equals("MultiPolygon")) { continue; }
 	 * 
-	 * MultiPolygon mp = (MultiPolygon) vectorLayers.getGeometry(); if
+	 * MultiPolygon mp = (MultiPolygon) be.vliz.opensealab.vectorLayers.getGeometry(); if
 	 * (mp.getExteriorRings().size() > 0) { List<Polygon> polygons =
 	 * mp.getExteriorRings(); for (Polygon p : polygons) { Feature f =
-	 * vectorLayers.copy(); f.setGeometry(p); deduped.add(f); } toRemove.add(vectorLayers); }
+	 * be.vliz.opensealab.vectorLayers.copy(); f.setGeometry(p); deduped.add(f); } toRemove.add(be.vliz.opensealab.vectorLayers); }
 	 * } features.removeAll(toRemove); features.addAll(deduped); }
 	 */
 

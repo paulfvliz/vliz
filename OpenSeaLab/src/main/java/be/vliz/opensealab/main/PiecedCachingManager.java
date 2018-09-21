@@ -1,15 +1,15 @@
-package main;
+package be.vliz.opensealab.main;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
-import exceptions.BizzException;
-import feature.FeatureCollection;
-import feature.Rectangle;
-import feature.Square;
-import feature.SurfaceCount;
-import vectorLayers.VectorLayersDAO;
+import be.vliz.opensealab.exceptions.BizzException;
+import be.vliz.opensealab.feature.FeatureCollection;
+import be.vliz.opensealab.feature.Rectangle;
+import be.vliz.opensealab.feature.Square;
+import be.vliz.opensealab.feature.SurfaceCount;
+import be.vliz.opensealab.vectorLayers.VectorLayersDAO;
 
 public class PiecedCachingManager implements LayerProvider {
 
@@ -34,7 +34,7 @@ public class PiecedCachingManager implements LayerProvider {
 	 * @param bbox
 	 * @param type
 	 * @param dividingProperty
-	 *            vectorLayers identifier (categorie)
+	 *            be.vliz.opensealab.vectorLayers identifier (categorie)
 	 * @return
 	 */
 	public FeatureCollection retrieve(Rectangle bbox, String type, String dividingProperty, boolean onlyUseCache,

@@ -1,4 +1,4 @@
-package bathymetry;
+package be.vliz.opensealab.bathymetry;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,9 +14,9 @@ import java.util.TreeSet;
 
 import com.owlike.genson.Genson;
 
-import exceptions.FatalException;
-import feature.Rectangle;
-import main.Util;
+import be.vliz.opensealab.exceptions.FatalException;
+import be.vliz.opensealab.feature.Rectangle;
+import be.vliz.opensealab.main.Util;
 
 public class BathymetryDAO {
 	private final String baseURL;

@@ -1,4 +1,4 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 import java.util.ArrayList;
 import java.util.Arrays;

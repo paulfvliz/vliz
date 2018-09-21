@@ -1,4 +1,4 @@
-package main;
+package be.vliz.opensealab.main;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,12 +13,12 @@ import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 
-import bathymetry.BathymetryDAO;
-import bathymetry.BathymetryServlet;
-import bathymetry.UCCBathymetry;
-import feature.Rectangle;
-import vectorLayers.VectorLayersDAO;
-import vectorLayers.VectorLayersServlet;
+import be.vliz.opensealab.bathymetry.BathymetryDAO;
+import be.vliz.opensealab.bathymetry.BathymetryServlet;
+import be.vliz.opensealab.bathymetry.UCCBathymetry;
+import be.vliz.opensealab.feature.Rectangle;
+import be.vliz.opensealab.vectorLayers.VectorLayersDAO;
+import be.vliz.opensealab.vectorLayers.VectorLayersServlet;
 
 public class Main {
 	private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
@@ -67,7 +67,7 @@ public class Main {
 		Server server = new Server(Integer.parseInt(appContext.getProperty(("port"))));
 		WebAppContext context = new WebAppContext();
 
-		BathymetryDAO bathymetryDAO = new BathymetryDAO(appContext.getProperty("bathymetry"),
+		BathymetryDAO bathymetryDAO = new BathymetryDAO(appContext.getProperty("be/vliz/opensealab/bathymetry"),
 				appContext.getProperty("cache-dir"), appContext.getProperty("bathymetry-stat"));
 		UCCBathymetry uccBathymetry = new UCCBathymetry(bathymetryDAO);
 
@@ -83,7 +83,7 @@ public class Main {
 		//initVectorLayerFromFile("test.json", context);
 		
 		HttpServlet bathymetryServlet = new BathymetryServlet(uccBathymetry);
-		context.addServlet(new ServletHolder(bathymetryServlet), "/bathymetry");
+		context.addServlet(new ServletHolder(bathymetryServlet), "/be/vliz/opensealab/bathymetry");
 
 		server.setHandler(context);
 		server.start();

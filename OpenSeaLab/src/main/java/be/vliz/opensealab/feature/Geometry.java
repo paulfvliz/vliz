@@ -1,4 +1,4 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 import java.io.Serializable;
 

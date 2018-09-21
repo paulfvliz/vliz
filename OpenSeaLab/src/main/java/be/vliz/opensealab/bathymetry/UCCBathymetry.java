@@ -1,8 +1,8 @@
-package bathymetry;
+package be.vliz.opensealab.bathymetry;
 
 import java.io.File;
 
-import feature.Rectangle;
+import be.vliz.opensealab.feature.Rectangle;
 
 public class UCCBathymetry {
 	private BathymetryDAO bathymetryDAO;

@@ -1,12 +1,9 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-
-import feature.Point;
-import feature.Polygon;
 
 
 public class SurfaceArea {

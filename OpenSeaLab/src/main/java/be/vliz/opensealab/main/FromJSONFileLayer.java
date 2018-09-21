@@ -1,14 +1,14 @@
-package main;
+package be.vliz.opensealab.main;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import exceptions.FatalException;
-import feature.FeatureCollection;
-import feature.FeatureCollectionBuilder;
-import feature.Rectangle;
-import feature.SurfaceCount;
+import be.vliz.opensealab.exceptions.FatalException;
+import be.vliz.opensealab.feature.FeatureCollection;
+import be.vliz.opensealab.feature.FeatureCollectionBuilder;
+import be.vliz.opensealab.feature.Rectangle;
+import be.vliz.opensealab.feature.SurfaceCount;
 
 /**
  * Mainly meant for testing

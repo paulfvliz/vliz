@@ -1,4 +1,4 @@
-package exceptions;
+package be.vliz.opensealab.exceptions;
 
 public class BizzException extends RuntimeException {
 

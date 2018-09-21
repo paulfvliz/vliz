@@ -1,4 +1,4 @@
-package main;
+package be.vliz.opensealab.main;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.Properties;
 import java.util.logging.LogManager;
 
-import exceptions.FatalException;
+import be.vliz.opensealab.exceptions.FatalException;
 
 public class AppContext {
 	private Properties props;

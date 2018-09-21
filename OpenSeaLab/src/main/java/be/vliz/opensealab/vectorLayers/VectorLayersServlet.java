@@ -1,4 +1,4 @@
-package vectorLayers;
+package be.vliz.opensealab.vectorLayers;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -15,13 +15,13 @@ import org.eclipse.jetty.servlet.DefaultServlet;
 
 import com.owlike.genson.Genson;
 
-import exceptions.BizzException;
-import exceptions.FatalException;
-import feature.FeatureCollection;
-import feature.Rectangle;
-import main.LayerProvider;
-import main.PiecedCachingManager;
-import main.Util;
+import be.vliz.opensealab.exceptions.BizzException;
+import be.vliz.opensealab.exceptions.FatalException;
+import be.vliz.opensealab.feature.FeatureCollection;
+import be.vliz.opensealab.feature.Rectangle;
+import be.vliz.opensealab.main.LayerProvider;
+import be.vliz.opensealab.main.PiecedCachingManager;
+import be.vliz.opensealab.main.Util;
 
 public class VectorLayersServlet extends DefaultServlet {
 	private static final long serialVersionUID = 1L;

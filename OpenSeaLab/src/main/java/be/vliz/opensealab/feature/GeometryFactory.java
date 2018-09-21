@@ -1,9 +1,9 @@
-package feature;
+package be.vliz.opensealab.feature;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import exceptions.FatalException;
+import be.vliz.opensealab.exceptions.FatalException;
 
 public class GeometryFactory {
 

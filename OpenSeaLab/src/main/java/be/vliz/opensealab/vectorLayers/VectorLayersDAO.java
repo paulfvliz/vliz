@@ -1,4 +1,4 @@
-package vectorLayers;
+package be.vliz.opensealab.vectorLayers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -12,12 +12,12 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
 
-import exceptions.FatalException;
-import feature.FeatureCollection;
-import feature.FeatureCollectionBuilder;
-import feature.Rectangle;
-import main.AppContext;
-import main.Util;
+import be.vliz.opensealab.exceptions.FatalException;
+import be.vliz.opensealab.feature.FeatureCollection;
+import be.vliz.opensealab.feature.FeatureCollectionBuilder;
+import be.vliz.opensealab.feature.Rectangle;
+import be.vliz.opensealab.main.AppContext;
+import be.vliz.opensealab.main.Util;
 
 public class VectorLayersDAO {
 	private static final Logger LOGGER = Logger.getLogger(VectorLayersDAO.class.getName());

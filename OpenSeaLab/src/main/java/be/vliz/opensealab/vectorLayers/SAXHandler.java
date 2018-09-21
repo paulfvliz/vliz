@@ -1,15 +1,15 @@
-package vectorLayers;
+package be.vliz.opensealab.vectorLayers;
 
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import feature.Feature;
-import feature.FeatureCollection;
-import feature.GeometryFactory;
-import feature.Point;
-import feature.Polygon;
+import be.vliz.opensealab.feature.Feature;
+import be.vliz.opensealab.feature.FeatureCollection;
+import be.vliz.opensealab.feature.GeometryFactory;
+import be.vliz.opensealab.feature.Point;
+import be.vliz.opensealab.feature.Polygon;
 
 public class SAXHandler extends DefaultHandler {
 	private final FeatureCollection featureCollection = new FeatureCollection();
