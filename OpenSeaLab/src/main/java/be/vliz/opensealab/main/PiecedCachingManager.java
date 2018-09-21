@@ -2,6 +2,7 @@ package be.vliz.opensealab.main;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 import be.vliz.opensealab.exceptions.BizzException;
@@ -17,7 +18,7 @@ public class PiecedCachingManager implements LayerProvider {
 	private final VectorLayersDAO nonCacheProvider;
 	private final CachingManager caching;
 	private final CachingManager statisticsCaching;
-	private int squaresDone = 0;
+	private AtomicInteger squaresDone = new AtomicInteger(0);
 
 	public PiecedCachingManager(VectorLayersDAO nonCacheProvider, CachingManager caching, CachingManager stats) {
 		this.nonCacheProvider = nonCacheProvider;
@@ -142,13 +143,11 @@ public class PiecedCachingManager implements LayerProvider {
 						SurfaceCount stats = toCache.calculateTotals(dividingProperty);
 						statisticsCaching.store(stats, s, type);
 
-						synchronized (whenDone) {
-							squaresDone++;
-							System.out.printf("\r%" + squaresFormat + "d/%d", squaresDone, squaresGoal);
-							if (squaresDone == squaresGoal && whenDone != null) {
-								LOGGER.info("All done with layer " + type);
-								new Thread(whenDone).start();
-							}
+						squaresDone.incrementAndGet();
+						System.out.printf("\r%" + squaresFormat + "d/%d", squaresDone, squaresGoal);
+						if (squaresDone.get() == squaresGoal && whenDone != null) {
+							LOGGER.info("All done with layer " + type);
+							new Thread(whenDone).start();
 						}
 					}
 
