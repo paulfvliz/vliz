@@ -14,6 +14,7 @@ import be.vliz.opensealab.feature.SurfaceCount;
  * Mainly meant for testing
  */
 public class FromJSONFileLayer implements LayerProvider {
+	private static final long serialVersionUID = 1L;
 	private final FeatureCollection fc;
 
 	public FromJSONFileLayer(String file) throws IOException {

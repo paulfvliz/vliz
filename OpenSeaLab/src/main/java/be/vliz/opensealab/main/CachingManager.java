@@ -16,7 +16,8 @@ import java.util.logging.Logger;
 import be.vliz.opensealab.exceptions.FatalException;
 import be.vliz.opensealab.feature.Rectangle;
 
-public class CachingManager {
+public class CachingManager implements Serializable {
+	private static final long serialVersionUID = 4132525243761526794L;
 	private static final Logger LOGGER = Logger.getLogger(CachingManager.class.getName());
 	private final String cache;
 	private final String pattern;
@@ -43,8 +44,9 @@ public class CachingManager {
 		Path p = getPath(bbox, type);
 		initCacheDir(p);
 		try (Writer writer = Files.newBufferedWriter(p, StandardCharsets.UTF_8)) {
-			if (!Files.exists(p.getParent())) {
-				Files.createDirectories(p.getParent());
+			Path parentPath = p.getParent();
+			if (parentPath != null && Files.notExists(parentPath)) {
+				Files.createDirectories(parentPath);
 			}
 			writer.write(data);
 			LOGGER.log(Level.FINE, "Cache file " + p + " created");
@@ -70,7 +72,7 @@ public class CachingManager {
 		try (ObjectOutputStream fileOut = new ObjectOutputStream(Files.newOutputStream(p))) {
 			fileOut.writeObject(ser);
 			fileOut.flush();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new FatalException(e);
 		}
 	}
@@ -82,14 +84,19 @@ public class CachingManager {
 	 * @param type
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public <T> T restore(Rectangle bbox, String type) {
 		try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(getPath(bbox, type)))) {
 			LOGGER.fine("Cache hit for "+getPath(bbox, type));
 			return (T) in.readObject();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			LOGGER.log(Level.INFO, "Could not load " + getPath(bbox, type) + ", purging it from cache", e);
-			new File(getPath(bbox, type).toString()).delete();
+			String path = getPath(bbox, type).toString();
+			if (!(new File(path).delete())){
+				LOGGER.warning("Could not delete path " + path);
+			}
+			return null;
+		} catch (ClassNotFoundException e) {
+			LOGGER.log(Level.SEVERE, "Could not restore cache.", e);
 			return null;
 		}
 	}
@@ -141,9 +148,10 @@ public class CachingManager {
 	}
 
 	private static void initCacheDir(Path p) {
-		if (!Files.exists(p.getParent())) {
+		Path parentPath = p.getParent();
+		if (parentPath != null && Files.notExists(parentPath)) {
 			try {
-				Files.createDirectories(p.getParent());
+				Files.createDirectories(parentPath);
 			} catch (IOException e) {
 				throw new FatalException(e);
 			}

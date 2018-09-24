@@ -3,6 +3,7 @@ package be.vliz.opensealab.vectorLayers;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,8 +20,9 @@ import be.vliz.opensealab.feature.Rectangle;
 import be.vliz.opensealab.main.AppContext;
 import be.vliz.opensealab.main.Util;
 
-public class VectorLayersDAO {
+public class VectorLayersDAO implements Serializable {
 	private static final Logger LOGGER = Logger.getLogger(VectorLayersDAO.class.getName());
+	private static final long serialVersionUID = -4586020725858884719L;
 	private final String url;
 	private final String defaultType;
 	private final String layerName;
@@ -116,7 +118,7 @@ public class VectorLayersDAO {
 			}
 			// StandardCharsets.UTF_8.name() > JDK 7
 			return new FeatureCollectionBuilder(result.toString("UTF-8")).create();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new FatalException(e);
 		}
 

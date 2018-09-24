@@ -79,7 +79,7 @@ public class BathymetryServlet extends DefaultServlet {
 			resp.setCharacterEncoding("UTF-8");
 			LOGGER.fine("Trying to get " + f.toPath());
 			Files.copy(f.toPath(), sos);
-		} catch (Exception exc) {
+		} catch (IOException exc) {
 			LOGGER.log(Level.WARNING, "Unexpected behavior", exc);
 		}
 	}

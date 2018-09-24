@@ -13,6 +13,7 @@ import be.vliz.opensealab.feature.SurfaceCount;
 import be.vliz.opensealab.vectorLayers.VectorLayersDAO;
 
 public class PiecedCachingManager implements LayerProvider {
+	private static final long serialVersionUID = 1L;
 
 	private static final Logger LOGGER = Logger.getLogger(PiecedCachingManager.class.getName());
 	private final VectorLayersDAO nonCacheProvider;
@@ -135,24 +136,20 @@ public class PiecedCachingManager implements LayerProvider {
 		for (int lat = (int) bbox.getMinLat(); lat < bbox.getMaxLat(); lat++) {
 			for (int lon = (int) bbox.getMinLon(); lon < bbox.getMaxLon(); lon++) {
 				final Square s = new Square(lat, lon);
-				Runnable task = new Runnable() {
-					@Override
-					public void run() {
-						FeatureCollection toCache = fromServer.clippedWith(s);
-						caching.store(toCache, s, type);
-						SurfaceCount stats = toCache.calculateTotals(dividingProperty);
-						statisticsCaching.store(stats, s, type);
+				Runnable task = () -> {
+					FeatureCollection toCache = fromServer.clippedWith(s);
+					caching.store(toCache, s, type);
+					SurfaceCount stats = toCache.calculateTotals(dividingProperty);
+					statisticsCaching.store(stats, s, type);
 
-						squaresDone.incrementAndGet();
-						System.out.printf("\r%" + squaresFormat + "d/%d", squaresDone, squaresGoal);
-						if (squaresDone.get() == squaresGoal && whenDone != null) {
-							LOGGER.info("All done with layer " + type);
-							new Thread(whenDone).start();
-						}
+					squaresDone.incrementAndGet();
+					System.out.printf("\r%" + squaresFormat + "d/%d", squaresDone, squaresGoal);
+					if (squaresDone.get() == squaresGoal && whenDone != null) {
+						LOGGER.info("All done with layer " + type);
+						new Thread(whenDone).start();
 					}
-
 				};
-				threads.submit(task);
+				threads.execute(task);
 			}
 		}
 		threads.shutdown();

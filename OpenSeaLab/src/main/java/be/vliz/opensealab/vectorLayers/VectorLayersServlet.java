@@ -3,6 +3,7 @@ package be.vliz.opensealab.vectorLayers;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -151,13 +152,13 @@ public class VectorLayersServlet extends DefaultServlet {
 	 *            {@link HttpServletResponse}
 	 */
 	private static void responseFromString(String data, HttpServletResponse resp) {
-		try (BufferedWriter sos = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream()))) {
+		try (BufferedWriter sos = new BufferedWriter(new OutputStreamWriter(resp.getOutputStream(), Charset.forName("UTF-8")))) {
 			resp.setContentType("application/json");
 			resp.setCharacterEncoding("UTF-8");
 			sos.write(data);
 			sos.flush();
-		} catch (Exception exc) {
-			LOGGER.log(Level.WARNING, "Unexpected behavior", exc);
+		} catch (IOException e){
+			LOGGER.log(Level.WARNING, "Unexpected behavior", e);
 		}
 	}
 

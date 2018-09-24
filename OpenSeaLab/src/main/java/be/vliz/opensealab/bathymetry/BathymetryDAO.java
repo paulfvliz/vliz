@@ -1,10 +1,8 @@
 package be.vliz.opensealab.bathymetry;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +16,8 @@ import be.vliz.opensealab.exceptions.FatalException;
 import be.vliz.opensealab.feature.Rectangle;
 import be.vliz.opensealab.main.Util;
 
-public class BathymetryDAO {
+public class BathymetryDAO  implements Serializable {
+	private static final long serialVersionUID = 8463248296265722011L;
 	private final String baseURL;
 	private final String cache;
 	private final String statPattern;
@@ -68,7 +67,7 @@ public class BathymetryDAO {
 
 	@SuppressWarnings("unchecked")
 	private static List<Double> fetchFrom(String url) {
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(Util.fetchFrom(url)))) {
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(Util.fetchFrom(url), Charset.forName("UTF-8")))) {
 			StringBuilder s = new StringBuilder();
 			String inputL = null;
 			while ((inputL = reader.readLine()) != null) {

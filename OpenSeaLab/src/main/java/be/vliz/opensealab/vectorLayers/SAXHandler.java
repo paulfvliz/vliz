@@ -8,7 +8,6 @@ import org.xml.sax.helpers.DefaultHandler;
 import be.vliz.opensealab.feature.Feature;
 import be.vliz.opensealab.feature.FeatureCollection;
 import be.vliz.opensealab.feature.GeometryFactory;
-import be.vliz.opensealab.feature.Point;
 import be.vliz.opensealab.feature.Polygon;
 
 public class SAXHandler extends DefaultHandler {
@@ -94,16 +93,14 @@ public class SAXHandler extends DefaultHandler {
 		}
 
 		if (endElement.equals("lowerCorner")) {
-			Point p = (Point) GeometryFactory.newPoint(sb.toString());
 			if (isFeature) {
-				feature.getBbox()[0] = p;
+				feature.setBboxLower(GeometryFactory.newPoint(sb.toString()));
 			}
 			return;
 		}
 		if (endElement.equals("upperCorner")) {
-			Point p = (Point) GeometryFactory.newPoint(sb.toString());
 			if (isFeature) {
-				feature.getBbox()[1] = p;
+				feature.setBboxUpper(GeometryFactory.newPoint(sb.toString()));
 			}
 			return;
 		}

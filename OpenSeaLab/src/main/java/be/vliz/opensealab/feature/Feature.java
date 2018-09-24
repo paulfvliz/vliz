@@ -1,6 +1,7 @@
 package be.vliz.opensealab.feature;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,11 +24,19 @@ public class Feature implements Serializable {
 	}
 	
 	public Point[] getBbox() {
-		return bbox;
+		return Arrays.copyOf(bbox, bbox.length);
 	}
 
 	public void setBbox(Point[] bbox) {
-		this.bbox = bbox;
+		this.bbox = Arrays.copyOf(bbox, bbox.length);
+	}
+
+	public void setBboxLower(Point lower) {
+		this.bbox[0] = lower;
+	}
+
+	public void setBboxUpper(Point upper) {
+		this.bbox[1] = upper;
 	}
 
 	public Geometry getGeometry() {

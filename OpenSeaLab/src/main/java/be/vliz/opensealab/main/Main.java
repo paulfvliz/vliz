@@ -38,13 +38,8 @@ public class Main {
 						Arrays.asList(appContext.getProperty("known-layers").split(";"));
 				
 				
-				Runnable lastAction = new Runnable() {
-
-					@Override
-					public void run() {
+				Runnable lastAction = () -> {
 						System.out.println("All done, exiting now");
-						System.exit(0);
-					}
 				};
 				
 				for (String layer : knownLayers) {
@@ -115,12 +110,12 @@ public class Main {
 		pcm.loadAndCacheAll(bbox, type, dividor, whenDone);
 	}
 	
-	@SuppressWarnings("unused")
-	private static void initVectorLayerFromFile(String file, WebAppContext context) throws IOException {
-		
-		HttpServlet servlet = new VectorLayersServlet(new FromJSONFileLayer("test.json"), "", "");
-		context.addServlet(new ServletHolder(servlet), "/test");
-	}
+//	@SuppressWarnings("unused")
+//	private static void initVectorLayerFromFile(String file, WebAppContext context) throws IOException {
+//
+//		HttpServlet servlet = new VectorLayersServlet(new FromJSONFileLayer("test.json"), "", "");
+//		context.addServlet(new ServletHolder(servlet), "/test");
+//	}
 
 	private static void initVectorLayerServlet(String layerName, AppContext appContext, WebAppContext context)
 			throws IOException {

@@ -97,15 +97,6 @@ public class Rectangle extends Geometry {
 	/**
 	 * Rounds the bounding box, makes minimum lower and maximum higher. The
 	 * coordinates are reordered if needed.
-	 * 
-	 * @param minLat
-	 *            minimum latitude
-	 * @param minLong
-	 *            minimum longitude
-	 * @param maxLat
-	 *            maximum latitude
-	 * @param maxLong
-	 *            maximum longitude
 	 */
 	public Rectangle extendRectangle() {
 		return new Rectangle(Math.floor(this.minLat), Math.floor(this.minLon), Math.ceil(this.maxLat),
@@ -118,7 +109,9 @@ public class Rectangle extends Geometry {
 	}
 
 	public boolean edgePoint(int lat, int lon) {
-		return (Math.floor(this.minLat) == lat || Math.ceil(this.maxLat) == lat + 1 || Math.floor(this.minLon) == lon
-				|| Math.ceil(this.maxLon) == lon + 1);
+		return (Math.abs(Math.floor(this.minLat) - lat) < 1
+			|| Math.abs(Math.ceil(this.maxLat) - (lat + 1)) < 1
+			|| Math.abs(Math.floor(this.minLon) - lon) < 1
+			|| Math.abs(Math.ceil(this.maxLon) - (lon + 1)) < 1);
 	}
 }
