@@ -10,11 +10,16 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import be.vliz.opensealab.exceptions.FatalException;
 import be.vliz.opensealab.feature.Rectangle;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 
 public class CachingManager implements Serializable {
 	private static final long serialVersionUID = 4132525243761526794L;
@@ -22,6 +27,13 @@ public class CachingManager implements Serializable {
 	private final String cache;
 	private final String pattern;
 	private final String layerName;
+	private final LoadingCache<Path, Object> memCache = CacheBuilder.newBuilder().maximumSize(10000)
+		.build(new CacheLoader<Path, Object>() {
+			@Override
+			public Object load(Path p) throws Exception {
+				return CachingManager.restoreInternal(p);
+			}
+		});
 
 	public CachingManager(String layerName, String cache, String pattern) throws IOException {
 		this.cache = cache + "/" + layerName;
@@ -85,13 +97,23 @@ public class CachingManager implements Serializable {
 	 * @return
 	 */
 	public <T> T restore(Rectangle bbox, String type) {
-		try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(getPath(bbox, type)))) {
-			LOGGER.fine("Cache hit for "+getPath(bbox, type));
+		Path p = getPath(bbox, type);
+		try {
+			return (T) memCache.get(p);
+		} catch (ExecutionException e) {
+			LOGGER.log(Level.WARNING,"Could not get cache for " + p, e);
+			return null;
+		}
+	}
+
+	private static <T> T restoreInternal(Path path) {
+		try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(path))) {
+			LOGGER.fine("Cache hit for "+path);
 			return (T) in.readObject();
 		} catch (IOException e) {
-			LOGGER.log(Level.INFO, "Could not load " + getPath(bbox, type) + ", purging it from cache", e);
-			String path = getPath(bbox, type).toString();
-			if (!(new File(path).delete())){
+			LOGGER.log(Level.INFO, "Could not load " + path + ", purging it from cache", e);
+			String pathString = path.toString();
+			if (!(new File(pathString).delete())){
 				LOGGER.warning("Could not delete path " + path);
 			}
 			return null;
