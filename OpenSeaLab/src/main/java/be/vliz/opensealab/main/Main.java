@@ -2,15 +2,21 @@ package be.vliz.opensealab.main;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServlet;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 import be.vliz.opensealab.bathymetry.BathymetryDAO;
@@ -79,6 +85,12 @@ public class Main {
 		
 		HttpServlet bathymetryServlet = new BathymetryServlet(uccBathymetry);
 		context.addServlet(new ServletHolder(bathymetryServlet), "/be/vliz/opensealab/bathymetry");
+
+		FilterHolder crossOriginFilter = new FilterHolder(new CrossOriginFilter());
+		crossOriginFilter.setInitParameters(appContext.getPropertyNames().stream()
+			.filter(p -> p.startsWith("cors."))
+			.collect(Collectors.toMap(p -> p.substring(5), p ->  appContext.getProperty(p) )));
+		context.addFilter(crossOriginFilter, "/*", EnumSet.allOf(DispatcherType.class));
 
 		server.setHandler(context);
 		server.start();

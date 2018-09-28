@@ -6,6 +6,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
+import java.util.Set;
 import java.util.logging.LogManager;
 
 import be.vliz.opensealab.exceptions.FatalException;
@@ -61,5 +62,9 @@ public class AppContext {
 	 */
 	public String getProperty(String key) {
 		return this.props.getProperty(key);
+	}
+
+	public Set<String> getPropertyNames() {
+		return this.props.stringPropertyNames();
 	}
 }
