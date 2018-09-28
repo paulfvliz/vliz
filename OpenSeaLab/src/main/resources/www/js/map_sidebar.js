@@ -32,14 +32,14 @@ var URLpart0 ="http://"+host+"/seabed?action=getGeoJSON&minLat=";
 var URLpart0Stats ="http://"+host+"/seabed?action=getStats&minLat=";*/
 
 var URLpart1="&maxLat=";
-var URLpart2="&minLong=";
-var URLpart3="&maxLong=";
+var URLpart2="&minLng=";
+var URLpart3="&maxLng=";
 var URLPart4="&type=";
 
 document.getElementById("minLat").value = "";
 document.getElementById("maxLat").value = "";
-document.getElementById("minLong").value = "";
-document.getElementById("maxLong").value = "";
+document.getElementById("minLng").value = "";
+document.getElementById("maxLng").value = "";
 
 
 
@@ -98,8 +98,8 @@ map.on({
 		var lons = coors.map(point => point.lng);
 		document.getElementById("minLat").value = String(Math.min.apply(null, lats));
 		document.getElementById("maxLat").value = String(Math.max.apply(null, lats));
-		document.getElementById("minLong").value = String(Math.min.apply(null, lons));
-		document.getElementById("maxLong").value = String(Math.max.apply(null, lons));
+		document.getElementById("minLng").value = String(Math.min.apply(null, lons));
+		document.getElementById("maxLng").value = String(Math.max.apply(null, lons));
 
 		document.getElementById('loadingSVG').style.zIndex = "4";
 
@@ -234,21 +234,21 @@ function getDataFromCoords(){
 
 	var minLat = document.getElementById("minLat").value;
 	var maxLat = document.getElementById("maxLat").value;
-	var minLong = document.getElementById("minLong").value;
-	var maxLong = document.getElementById("maxLong").value;
-	getDataForCoords(minLat, maxLat, minLong, maxLong, "False");
+	var minLng = document.getElementById("minLng").value;
+	var maxLng = document.getElementById("maxLng").value;
+	getDataForCoords(minLat, maxLat, minLng, maxLng, "False");
 }
 
-function getDataForCoords(minLat, maxLat, minLong, maxLong, caching){
-	if(minLat == "" || maxLat == "" || minLong == "" || maxLong == ""){
+function getDataForCoords(minLat, maxLat, minLng, maxLng, caching){
+	if(minLat == "" || maxLat == "" || minLng == "" || maxLng == ""){
 		alert("Specify an area first");
 		return;
 	}
 
     URLcoordinates = minLat +
 						URLpart1 + maxLat +
-						URLpart2 + minLong + 
-						URLpart3 + maxLong +
+						URLpart2 + minLng +
+						URLpart3 + maxLng +
 						"&cacheOnly=" + caching +
 						"&geomType=polygon";
 	loadDataFrom(URLpart0 + URLcoordinates);
@@ -375,8 +375,8 @@ function clearData(){
 function deleteButton(){
 	document.getElementById("minLat").value = "";
 	document.getElementById("maxLat").value = "";
-	document.getElementById("minLong").value = "";
-	document.getElementById("maxLong").value = "";
+	document.getElementById("minLng").value = "";
+	document.getElementById("maxLng").value = "";
 	clearData();
 	clearRect();
 }

@@ -69,7 +69,7 @@ public class Util {
 	}
 
 	public static Rectangle getBBox(HttpServletRequest req) {
-		return new Rectangle(req.getParameter("minLat"), req.getParameter("minLong"), req.getParameter("maxLat"),
-				req.getParameter("maxLong"));
+		return new Rectangle(req.getParameter("minLat"), req.getParameter("minLng"), req.getParameter("maxLat"),
+				req.getParameter("maxLng"));
 	}
 }
