@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 
 import be.vliz.opensealab.exceptions.FatalException;
 import be.vliz.opensealab.feature.Rectangle;
-import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
