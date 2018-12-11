@@ -63,30 +63,32 @@ public class FeatureCollection implements Serializable {
 	 * @return
 	 */
 	public SurfaceCount calculateTotals(String dividingProperty) {
-		double totalArea = 0.0;
+		double total = 0.0;
 		HashMap<String, Double> parts = new HashMap<>();
 		parts.put("points", 0.0);
 		for (Feature f : features) {
 			Geometry geo = f.getGeometry();
 			if (geo == null)
 				continue;
-			if (geo.getType().equals("Point")) {
-				parts.put("points", parts.getOrDefault("points", 0.0) + 1.0);
-				continue;
-			}
 
 			Map<String, Object> m = f.getProperties();
 			String name = (String) m.get(dividingProperty); // used "AllcombD" previously
 			Double s = parts.getOrDefault(name, 0.0);
+			double featureTotal = 0.0;
 
-			double surfaceArea = geo.surfaceArea();
-			if (Double.isNaN(surfaceArea)) {
-				continue;
+			if (geo.getType().equals("Point")) {
+				featureTotal = parts.getOrDefault("points", 0.0) + 1.0;
+				//parts.put("points", featureTotal);
+			} else {
+				featureTotal = geo.surfaceArea();
+				if (Double.isNaN(featureTotal)) {
+					continue;
+				}
 			}
-			parts.put(name, s + surfaceArea);
-			totalArea += surfaceArea;
+			parts.put(name, s + featureTotal);
+			total += featureTotal;
 		}
-		return new SurfaceCount(totalArea, parts);
+		return new SurfaceCount(total, parts);
 	}
 
 	public FeatureCollection joinWith(FeatureCollection fc) {

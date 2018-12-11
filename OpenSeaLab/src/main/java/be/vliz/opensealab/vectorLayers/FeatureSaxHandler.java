@@ -10,7 +10,7 @@ import be.vliz.opensealab.feature.FeatureCollection;
 import be.vliz.opensealab.feature.GeometryFactory;
 import be.vliz.opensealab.feature.Polygon;
 
-public class SAXHandler extends DefaultHandler {
+public class FeatureSaxHandler extends DefaultHandler {
 	private final FeatureCollection featureCollection = new FeatureCollection();
 	private Feature feature;
 

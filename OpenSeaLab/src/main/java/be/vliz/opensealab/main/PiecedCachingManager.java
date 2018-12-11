@@ -10,21 +10,28 @@ import be.vliz.opensealab.feature.FeatureCollection;
 import be.vliz.opensealab.feature.Rectangle;
 import be.vliz.opensealab.feature.Square;
 import be.vliz.opensealab.feature.SurfaceCount;
-import be.vliz.opensealab.vectorLayers.VectorLayersDAO;
+import be.vliz.opensealab.vectorLayers.dao.VectorLayersDao;
+import be.vliz.opensealab.vectorLayers.model.DataCacheKey;
+import be.vliz.opensealab.vectorLayers.model.FeatureType;
+import org.ehcache.Cache;
+import org.ehcache.CacheManager;
+
+import javax.inject.Inject;
 
 public class PiecedCachingManager implements LayerProvider {
-	private static final long serialVersionUID = 1L;
-
 	private static final Logger LOGGER = Logger.getLogger(PiecedCachingManager.class.getName());
-	private final VectorLayersDAO nonCacheProvider;
-	private final CachingManager caching;
-	private final CachingManager statisticsCaching;
+	private final VectorLayersDao nonCacheProvider;
+	private final Cache<DataCacheKey, FeatureCollection> dataCache;
+	private final Cache<DataCacheKey, SurfaceCount> statsCache;
+
 	private AtomicInteger squaresDone = new AtomicInteger(0);
 
-	public PiecedCachingManager(VectorLayersDAO nonCacheProvider, CachingManager caching, CachingManager stats) {
+	@Inject
+	public PiecedCachingManager(VectorLayersDao nonCacheProvider, CacheManager cacheManager) {
 		this.nonCacheProvider = nonCacheProvider;
-		this.caching = caching;
-		this.statisticsCaching = stats;
+		dataCache = cacheManager.getCache("featureData", DataCacheKey.class, FeatureCollection.class);
+		statsCache = cacheManager.getCache("featureStats", DataCacheKey.class, SurfaceCount.class);
+
 	}
 
 	/**
@@ -39,7 +46,7 @@ public class PiecedCachingManager implements LayerProvider {
 	 *            be.vliz.opensealab.vectorLayers identifier (categorie)
 	 * @return
 	 */
-	public FeatureCollection retrieve(Rectangle bbox, String type, String dividingProperty, boolean onlyUseCache,
+	public FeatureCollection retrieve(Rectangle bbox, FeatureType type, String dividingProperty, boolean onlyUseCache,
 			String geomType) {
 
 		Rectangle extended = bbox.extendRectangle();
@@ -57,7 +64,7 @@ public class PiecedCachingManager implements LayerProvider {
 	}
 
 	/**
-	 * Delegates the hard work to {@link #retrieve(Rectangle, String, boolean)}
+	 * Delegates the hard work to {@link #retrieve(Rectangle, FeatureType, String, boolean, String)}
 	 * method with the argument onlyUseCache equals to false.
 	 * 
 	 * @param bbox
@@ -65,13 +72,12 @@ public class PiecedCachingManager implements LayerProvider {
 	 * @param dividingProperty
 	 * @return
 	 */
-	public FeatureCollection retrieve(Rectangle bbox, String type, String dividingProperty, String geomType) {
+	public FeatureCollection retrieve(Rectangle bbox, FeatureType type, String dividingProperty, String geomType) {
 		return retrieve(bbox, type, dividingProperty, false, geomType);
 	}
 
-	public SurfaceCount retrieveStats(Rectangle bbox, String type, String dividingProperty, String geomType) {
+	public SurfaceCount retrieveStats(Rectangle bbox, FeatureType type, String dividingProperty, String geomType) {
 		Rectangle extended = bbox.extendRectangle();
-
 		SurfaceCount sc = new SurfaceCount();
 
 		for (int lat = (int) extended.getMinLat(); lat < extended.getMaxLat(); lat++) {
@@ -86,9 +92,10 @@ public class PiecedCachingManager implements LayerProvider {
 					continue;
 				}
 
-				if (statisticsCaching.isInCache(searched, type)) {
+				DataCacheKey cacheKey = new DataCacheKey(type, searched);
+				if (statsCache.containsKey(cacheKey)) {
 					// statistics are in cache!
-					SurfaceCount found = statisticsCaching.restore(searched, type);
+					SurfaceCount found = statsCache.get(cacheKey);
 					sc = sc.merge(found);
 					continue;
 				}
@@ -114,9 +121,10 @@ public class PiecedCachingManager implements LayerProvider {
 	 * @param type
 	 * @param dividingProperty
 	 */
-	public void loadAndCacheAll(Rectangle bbox, String type, String dividingProperty, Runnable whenDone) {
+	public void loadAndCacheAll(Rectangle bbox, FeatureType type, String dividingProperty, Runnable whenDone) {
 		bbox = bbox.extendRectangle();
-		if (caching.isInCache(new Square(bbox.getMinLat(), bbox.getMinLon()), type)) {
+		DataCacheKey cacheKey = new DataCacheKey(type, new Square(bbox.getMinLat(), bbox.getMinLon()));
+		if (dataCache.containsKey(cacheKey)) {
 			// already cached! Abort
 			LOGGER.info("Already cached: " + type);
 			whenDone.run();
@@ -136,11 +144,11 @@ public class PiecedCachingManager implements LayerProvider {
 		for (int lat = (int) bbox.getMinLat(); lat < bbox.getMaxLat(); lat++) {
 			for (int lon = (int) bbox.getMinLon(); lon < bbox.getMaxLon(); lon++) {
 				final Square s = new Square(lat, lon);
+				DataCacheKey key = new DataCacheKey(type, s);
 				Runnable task = () -> {
 					FeatureCollection toCache = fromServer.clippedWith(s);
-					caching.store(toCache, s, type);
-					SurfaceCount stats = toCache.calculateTotals(dividingProperty);
-					statisticsCaching.store(stats, s, type);
+					dataCache.put(key, toCache);
+					statsCache.put(key, toCache.calculateTotals(dividingProperty));
 
 					squaresDone.incrementAndGet();
 					System.out.printf("\r%" + squaresFormat + "d/%d", squaresDone, squaresGoal);
@@ -156,24 +164,22 @@ public class PiecedCachingManager implements LayerProvider {
 
 	}
 
-	private FeatureCollection loadAndCachePart(int lat, int lon, String type, String dividingProperty,
+	private FeatureCollection loadAndCachePart(int lat, int lon, FeatureType type, String dividingProperty,
 			boolean onlyUseCache, String geomType) {
-		Rectangle searched = new Square(lat, lon);
+		DataCacheKey key = new DataCacheKey(type, new Square(lat, lon));
 		FeatureCollection found = null;
-		if (caching.isInCache(searched, type)) {
-			found = caching.restore(searched, type);
+		if (dataCache.containsKey(key)) {
+			found = dataCache.get(key);
 		}
 
 		if (found == null && !onlyUseCache) {
 			// caching file might have gotten corrupted and might have returned null
-			found = nonCacheProvider.getFeatures(searched, type);
-			caching.store(found, searched, type);
+			found = nonCacheProvider.getFeatures(key.getGrid(), type);
+			dataCache.put(key, found);
 			SurfaceCount stats = null;
-			if (geomType.equals("polygon")) {
+			if (geomType.equals("polygon") || geomType.equals("point")) {
 				stats = found.calculateTotals(dividingProperty);
-				statisticsCaching.store(stats, searched, type);
-			} else if (geomType.equals("point")) {
-				// TODO call to point statistics method
+				statsCache.put(key, stats);
 			} else if (geomType.equals("line")) {
 				// TODO call to statistics method
 			} else {

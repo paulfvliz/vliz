@@ -55,7 +55,7 @@ public class Polygon extends Geometry {
 	@Override
 	public String getCoordinates() {
 		StringBuilder sb = new StringBuilder();
-	//	sb.append("[ ");
+		sb.append("[");
 		for (List<Point> ring : rings) {
 			sb.append("[");
 			for (Point point : ring) {
@@ -66,7 +66,7 @@ public class Polygon extends Geometry {
 			sb.append("], ");
 		}
 		sb.delete(sb.length() - 2, sb.length());
-	//	sb.append("]");
+		sb.append("]");
 		return sb.toString();
 	}
 

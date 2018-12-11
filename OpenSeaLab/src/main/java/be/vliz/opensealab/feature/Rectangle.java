@@ -2,6 +2,8 @@ package be.vliz.opensealab.feature;
 
 import be.vliz.opensealab.main.AppContext;
 
+import java.util.Objects;
+
 public class Rectangle extends Geometry {
 
 	private static final long serialVersionUID = 1L;
@@ -113,5 +115,21 @@ public class Rectangle extends Geometry {
 			|| Math.abs(Math.ceil(this.maxLat) - (lat + 1)) < 1
 			|| Math.abs(Math.floor(this.minLon) - lon) < 1
 			|| Math.abs(Math.ceil(this.maxLon) - (lon + 1)) < 1);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Rectangle rectangle = (Rectangle) o;
+		return Double.compare(rectangle.minLat, minLat) == 0 &&
+				Double.compare(rectangle.minLon, minLon) == 0 &&
+				Double.compare(rectangle.maxLat, maxLat) == 0 &&
+				Double.compare(rectangle.maxLon, maxLon) == 0;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(minLat, minLon, maxLat, maxLon);
 	}
 }

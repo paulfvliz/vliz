@@ -2,6 +2,7 @@ package be.vliz.opensealab.main;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,7 +50,11 @@ public class AppContext {
 		try (FileInputStream file = new FileInputStream(properties)) {
 			props.load(file);
 		} catch (IOException exc) {
-			throw new FatalException(exc);
+		    try (InputStream is = AppContext.class.getResourceAsStream(properties)) {
+                props.load(is);
+            } catch (IOException e) {
+                throw new FatalException(exc);
+            }
 		}
 	}
 
@@ -66,5 +71,9 @@ public class AppContext {
 
 	public Set<String> getPropertyNames() {
 		return this.props.stringPropertyNames();
+	}
+
+	public Properties getProperties() {
+		return new Properties(props);
 	}
 }

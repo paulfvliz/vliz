@@ -9,6 +9,7 @@ import be.vliz.opensealab.feature.FeatureCollection;
 import be.vliz.opensealab.feature.FeatureCollectionBuilder;
 import be.vliz.opensealab.feature.Rectangle;
 import be.vliz.opensealab.feature.SurfaceCount;
+import be.vliz.opensealab.vectorLayers.model.FeatureType;
 
 /**
  * Mainly meant for testing
@@ -24,13 +25,13 @@ public class FromJSONFileLayer implements LayerProvider {
 	}
 
 	@Override
-	public FeatureCollection retrieve(Rectangle bbox, String type, String dividingProperty, boolean cacheOnly,
-			String geomType) {
+	public FeatureCollection retrieve(Rectangle bbox, FeatureType type, String dividingProperty, boolean cacheOnly,
+									  String geomType) {
 		return fc;
 	}
 
 	@Override
-	public SurfaceCount retrieveStats(Rectangle bbox, String type, String dividingProperty, String geomType) {
+	public SurfaceCount retrieveStats(Rectangle bbox, FeatureType type, String dividingProperty, String geomType) {
 		throw new FatalException("Not supported");
 	}
 

@@ -1,5 +1,7 @@
 package be.vliz.opensealab.feature;
 
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +9,7 @@ import java.util.Map;
 import com.owlike.genson.Genson;
 
 public class FeatureCollectionBuilder {
-	private final String geoJSON;
+	private final Reader geoJSON;
 
 	/**
 	 * Constructs a be.vliz.opensealab.vectorLayers collection builder for the string parameter.
@@ -16,6 +18,10 @@ public class FeatureCollectionBuilder {
 	 *            a json string that has geojson specs.
 	 */
 	public FeatureCollectionBuilder(String geoJSON) {
+		this.geoJSON = new StringReader(geoJSON);
+	}
+
+	public FeatureCollectionBuilder(Reader geoJSON) {
 		this.geoJSON = geoJSON;
 	}
 

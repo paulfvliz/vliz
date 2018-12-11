@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import be.vliz.opensealab.exceptions.FatalException;
 import be.vliz.opensealab.feature.Rectangle;
+import com.google.common.base.Joiner;
 
 public class Util {
 	private static final Logger LOGGER = Logger.getLogger(Util.class.getName());
@@ -69,7 +70,12 @@ public class Util {
 	}
 
 	public static Rectangle getBBox(HttpServletRequest req) {
-		return new Rectangle(req.getParameter("minLat"), req.getParameter("minLng"), req.getParameter("maxLat"),
-				req.getParameter("maxLng"));
+		return new Rectangle(req.getParameter("latmin"), req.getParameter("lonmin"), req.getParameter("latmax"),
+				req.getParameter("lonmax"));
+	}
+
+	private static final String DEFAULT_PROJECTION = "urn:ogc:def:crs:EPSG::4326";
+	public static String rectangleToBBoxString(Rectangle bbox) {
+		return Joiner.on(",").join(bbox.getMinLat(),bbox.getMinLon(),bbox.getMaxLat(),bbox.getMaxLon(), DEFAULT_PROJECTION);
 	}
 }

@@ -17,7 +17,7 @@ public class SaxHandlerTest {
 		try (InputStream file = SaxHandlerTest.class.getResourceAsStream("test.xml")) {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
-			SAXHandler userhandler = new SAXHandler();
+			FeatureSaxHandler userhandler = new FeatureSaxHandler();
 			saxParser.parse(file,userhandler);
 		}
 	}
