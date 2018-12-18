@@ -3,9 +3,9 @@
 XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/
 j2ee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-    <display-name>Open Sea Layers</display-name>
+    <display-name>EMODNet Query Tool App</display-name>
     <servlet>
-        <servlet-name>Open Sea Layers REST Service</servlet-name>
+        <servlet-name>EMODNet Query Tool REST Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <!--servlet-name>javax.ws.rs.core.Application</servlet-name-->
         <load-on-startup>1</load-on-startup>
@@ -15,12 +15,21 @@ j2ee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
         </init-param>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>be.vliz.emodnet.querytool.vectorLayers.controller</param-value>
+            <param-value>be.vliz.emodnet.querytool.vectorLayers.controller;io.swagger.v3.jaxrs2.integration.resources</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>default</servlet-name>
+        <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>Open Sea Layers REST Service</servlet-name>
+        <servlet-name>EMODNet Query Tool REST Service</servlet-name>
         <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/docs/*</url-pattern>
     </servlet-mapping>
     <filter>
         <filter-name>CorsFilter</filter-name>

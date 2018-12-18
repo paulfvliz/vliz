@@ -18,7 +18,6 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-
 @Path("/layer/{layerName}/feature/{featureName}")
 public class FeatureTypeController {
 	private LayerProvider layerProvider;

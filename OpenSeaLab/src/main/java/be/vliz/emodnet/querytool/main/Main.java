@@ -80,21 +80,20 @@ public class Main {
 		server.setHandler(context);
 		//WebAppContext context = new WebAppContext();
 
+		context.setResourceBase(Main.class.getResource("/www").toString());
+
 		ServletHolder servletHolder = context.addServlet(ServletContainer.class, "/eqt/*");
 		servletHolder.setInitOrder(0);
 		servletHolder.setInitParameter("javax.ws.rs.Application", App.class.getCanonicalName());
 		servletHolder.setInitParameter(
 				"jersey.config.server.provider.packages",
-				"be.vliz.emodnet.querytool.vectorLayers.controller");
+				"be.vliz.emodnet.querytool.vectorLayers.controller;io.swagger.v3.jaxrs2.integration.resources");
 
 
 
 		BathymetryDAO bathymetryDAO = new BathymetryDAO(appContext.getProperty("bathymetry"),
 				appContext.getProperty("cache-dir"), appContext.getProperty("bathymetry-stat"));
 		UCCBathymetry uccBathymetry = new UCCBathymetry(bathymetryDAO);
-
-		context.setResourceBase(Main.class.getResource("/www").toString());
-		context.addServlet(new ServletHolder(new DefaultServlet()), "/");
 
 		HttpServlet bathymetryServlet = new BathymetryServlet(uccBathymetry);
 		context.addServlet(new ServletHolder(bathymetryServlet), "/bathymetry");
@@ -120,9 +119,11 @@ public class Main {
 		});
 
 		try {
-			server.start();
-			LOGGER.info("The server is listening...");
-			server.join();
+            server.start();
+            LOGGER.info("The server is listening...");
+            server.join();
+        } catch (Throwable e) {
+		    LOGGER.log(Level.SEVERE, "Could not start server", e);
 		} finally {
 			LOGGER.info("Stopping!");
 			server.destroy();
