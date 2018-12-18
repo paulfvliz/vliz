@@ -3,7 +3,7 @@
         xmlns='http://www.ehcache.org/v3'
         xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
 
-    <persistence directory="work/Catalina/localhost/osl/osl-cache" />
+    <persistence directory="${java.io.tmpdir}/osl-cache" />
 
     <cache-template name="featureTypeTemplate">
         <key-type>java.lang.String</key-type>
@@ -18,8 +18,8 @@
     </cache-template>
 
     <cache-template name="dataCacheTemplate">
-        <key-type>be.vliz.opensealab.vectorLayers.model.DataCacheKey</key-type>
-        <value-type>be.vliz.opensealab.feature.FeatureCollection</value-type>
+        <key-type>be.vliz.emodnet.querytool.vectorLayers.model.DataCacheKey</key-type>
+        <value-type>be.vliz.emodnet.querytool.feature.FeatureCollection</value-type>
         <expiry>
             <ttl unit="days">5</ttl>
         </expiry>
@@ -31,7 +31,7 @@
 
     <cache alias="featureData" uses-template="dataCacheTemplate"/>
     <cache alias="featureStats" uses-template="dataCacheTemplate">
-        <value-type>be.vliz.opensealab.feature.SurfaceCount</value-type>
+        <value-type>be.vliz.emodnet.querytool.feature.SurfaceCount</value-type>
     </cache>
 
 </config>

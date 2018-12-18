@@ -11,11 +11,11 @@ j2ee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
         <load-on-startup>1</load-on-startup>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>be.vliz.opensealab.main.App</param-value>
+            <param-value>be.vliz.emodnet.querytool.main.App</param-value>
         </init-param>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>be.vliz.opensealab.vectorLayers.controller</param-value>
+            <param-value>be.vliz.emodnet.querytool.vectorLayers.controller</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
