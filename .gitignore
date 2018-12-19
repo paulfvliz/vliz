@@ -12,4 +12,4 @@ OpenSeaLab/geology.json
 target
 .idea
 dependency-reduced-pom.xml
-log
+**/log
