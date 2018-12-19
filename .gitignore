@@ -1,15 +1,4 @@
-/.metadata/
-/.recommenders/
-/OpenSeaLabJava/.classpath
-RemoteSystemsTempFiles/
-Servers/*
-OpenSeaLab/bin/*
-OpenSeaLab/cache/*
-OpenSeaLab/www/.DS_Store
-**.DS_Store
-OpenSeaLab/www/map.html
-OpenSeaLab/geology.json
-target
+**/target
 .idea
 dependency-reduced-pom.xml
-log*.txt
+**/log
