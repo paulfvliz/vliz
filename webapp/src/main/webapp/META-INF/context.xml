@@ -1,0 +1,7 @@
+<Context>
+    <!-- Ehcache configuration falls back to classpath resource /ehcache.xml
+    <Environment name="cacheConfig" value="ehcache.xml" type="java.lang.String"/>
+    -->
+    <!-- Application configuration falls back to classpath resource /be/vliz/emodnet/querytool/server/prod.properties -->
+    <Environment name="appConfig" value="prod.properties" type="java.lang.String"/>
+</Context>

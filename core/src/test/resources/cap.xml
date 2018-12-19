@@ -1,0 +1,1258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:WFS_Capabilities version="1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xmlns="http://www.opengis.net/wfs" xmlns:wfs="http://www.opengis.net/wfs"
+                      xmlns:ows="http://www.opengis.net/ows" xmlns:gml="http://www.opengis.net/gml"
+                      xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink"
+                      xsi:schemaLocation="http://www.opengis.net/wfs http://drive.emodnet-geology.eu:80/geoserver/schemas/wfs/1.1.0/wfs.xsd http://inspire.ec.europa.eu/schemas/inspire_dls/1.0 http://inspire.ec.europa.eu/schemas/inspire_dls/1.0/inspire_dls.xsd"
+                      xmlns:inspire_dls="http://inspire.ec.europa.eu/schemas/inspire_dls/1.0"
+                      xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0"
+                      xmlns:EMODnetGeology="emodnetgeology" updateSequence="1941">
+    <ows:ServiceIdentification>
+        <ows:Title>EMODnet Geology Web Feature Service</ows:Title>
+        <ows:Abstract>Marine research is truly multidisciplinary as evidenced by e.g. the EMODnet I, II, and III
+            projects that have been running since 2009. EMODnet Geology has succeeded in bringing together harmonised
+            offshore data including sea-floor geology, seabed substrates, rates of coastline migration, geological
+            events and probabilities and mineral resources.&#13;
+            &#13;
+            Now in its third phase, EMODnet Geology Portal consolidates the existing data products with higher
+            resolution and more contents. New services are being built, so users can investigate and search for borehole
+            data, seismic survey data, and multibeam survey data using interactive maps and tools.&#13;
+            &#13;
+            We encourage you to contact us, should you have ideas for further improvements or would like to share, how
+            you benefit from our products and services.
+        </ows:Abstract>
+        <ows:Keywords>
+            <ows:Keyword>WFS</ows:Keyword>
+            <ows:Keyword>WMS</ows:Keyword>
+            <ows:Keyword>GEOSERVER</ows:Keyword>
+        </ows:Keywords>
+        <ows:ServiceType>WFS</ows:ServiceType>
+        <ows:ServiceTypeVersion>1.1.0</ows:ServiceTypeVersion>
+        <ows:Fees>NONE</ows:Fees>
+        <ows:AccessConstraints>Copyright: European Community represented by the European Commission. The holders of the
+            intellectual property rights (IPR) to the data, which existed prior to the Contract being entered into, are
+            the EMODNET-Geology partners. The EMODNET-Geology partners (the IPR holders) give no warranty, condition or
+            representation as to the quality, accuracy or completeness of the data, information, or service, or its
+            suitability for any use or purpose. All implied conditions relating to the quality or suitability of the
+            information, and all liabilities arising from the supply of the information (including any liability arising
+            in negligence) are excluded to the fullest extent permitted by law.
+        </ows:AccessConstraints>
+    </ows:ServiceIdentification>
+    <ows:ServiceProvider>
+        <ows:ProviderName>EMODnet Geology</ows:ProviderName>
+        <ows:ServiceContact>
+            <ows:IndividualName>GEUS (Att. Bjarni Pjetursson)</ows:IndividualName>
+            <ows:PositionName>Data Manager</ows:PositionName>
+            <ows:ContactInfo>
+                <ows:Phone>
+                    <ows:Voice>0045 91 33 39 60</ows:Voice>
+                    <ows:Facsimile/>
+                </ows:Phone>
+                <ows:Address>
+                    <ows:DeliveryPoint/>
+                    <ows:City>Copenhagen K</ows:City>
+                    <ows:AdministrativeArea/>
+                    <ows:PostalCode>1350</ows:PostalCode>
+                    <ows:Country>Danmark</ows:Country>
+                    <ows:ElectronicMailAddress>bpj@geus.dk</ows:ElectronicMailAddress>
+                </ows:Address>
+            </ows:ContactInfo>
+        </ows:ServiceContact>
+    </ows:ServiceProvider>
+    <ows:OperationsMetadata>
+        <ows:Operation name="GetCapabilities">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                    <ows:Post xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:Parameter name="AcceptVersions">
+                <ows:Value>1.0.0</ows:Value>
+                <ows:Value>1.1.0</ows:Value>
+            </ows:Parameter>
+            <ows:Parameter name="AcceptFormats">
+                <ows:Value>text/xml</ows:Value>
+            </ows:Parameter>
+        </ows:Operation>
+        <ows:Operation name="DescribeFeatureType">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                    <ows:Post xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:Parameter name="outputFormat">
+                <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+            </ows:Parameter>
+        </ows:Operation>
+        <ows:Operation name="GetFeature">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                    <ows:Post xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:Parameter name="resultType">
+                <ows:Value>results</ows:Value>
+                <ows:Value>hits</ows:Value>
+            </ows:Parameter>
+            <ows:Parameter name="outputFormat">
+                <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+                <ows:Value>GML2</ows:Value>
+                <ows:Value>KML</ows:Value>
+                <ows:Value>SHAPE-ZIP</ows:Value>
+                <ows:Value>application/gml+xml; version=3.2</ows:Value>
+                <ows:Value>application/json</ows:Value>
+                <ows:Value>application/vnd.google-earth.kml xml</ows:Value>
+                <ows:Value>application/vnd.google-earth.kml+xml</ows:Value>
+                <ows:Value>csv</ows:Value>
+                <ows:Value>gml3</ows:Value>
+                <ows:Value>gml32</ows:Value>
+                <ows:Value>json</ows:Value>
+                <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+                <ows:Value>text/xml; subtype=gml/3.2</ows:Value>
+            </ows:Parameter>
+            <ows:Constraint name="LocalTraverseXLinkScope">
+                <ows:Value>2</ows:Value>
+            </ows:Constraint>
+        </ows:Operation>
+        <ows:Operation name="GetGmlObject">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                    <ows:Post xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                </ows:HTTP>
+            </ows:DCP>
+        </ows:Operation>
+        <ows:Operation name="LockFeature">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                    <ows:Post xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:Parameter name="releaseAction">
+                <ows:Value>ALL</ows:Value>
+                <ows:Value>SOME</ows:Value>
+            </ows:Parameter>
+        </ows:Operation>
+        <ows:Operation name="GetFeatureWithLock">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                    <ows:Post xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:Parameter name="resultType">
+                <ows:Value>results</ows:Value>
+                <ows:Value>hits</ows:Value>
+            </ows:Parameter>
+            <ows:Parameter name="outputFormat">
+                <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+                <ows:Value>GML2</ows:Value>
+                <ows:Value>KML</ows:Value>
+                <ows:Value>SHAPE-ZIP</ows:Value>
+                <ows:Value>application/gml+xml; version=3.2</ows:Value>
+                <ows:Value>application/json</ows:Value>
+                <ows:Value>application/vnd.google-earth.kml xml</ows:Value>
+                <ows:Value>application/vnd.google-earth.kml+xml</ows:Value>
+                <ows:Value>csv</ows:Value>
+                <ows:Value>gml3</ows:Value>
+                <ows:Value>gml32</ows:Value>
+                <ows:Value>json</ows:Value>
+                <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+                <ows:Value>text/xml; subtype=gml/3.2</ows:Value>
+            </ows:Parameter>
+        </ows:Operation>
+        <ows:Operation name="Transaction">
+            <ows:DCP>
+                <ows:HTTP>
+                    <ows:Get xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                    <ows:Post xlink:href="http://drive.emodnet-geology.eu:80/geoserver/EMODnetGeology/wfs"/>
+                </ows:HTTP>
+            </ows:DCP>
+            <ows:Parameter name="inputFormat">
+                <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+            </ows:Parameter>
+            <ows:Parameter name="idgen">
+                <ows:Value>GenerateNew</ows:Value>
+                <ows:Value>UseExisting</ows:Value>
+                <ows:Value>ReplaceDuplicate</ows:Value>
+            </ows:Parameter>
+            <ows:Parameter name="releaseAction">
+                <ows:Value>ALL</ows:Value>
+                <ows:Value>SOME</ows:Value>
+            </ows:Parameter>
+        </ows:Operation>
+    </ows:OperationsMetadata>
+    <FeatureTypeList>
+        <Operations>
+            <Operation>Query</Operation>
+            <Operation>Insert</Operation>
+            <Operation>Update</Operation>
+            <Operation>Delete</Operation>
+            <Operation>Lock</Operation>
+        </Operations>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_aggregate_deposits</Name>
+            <Title>Aggregate deposits</Title>
+            <Abstract>Marine aggregates comprise near-shore deposits of non-metallic detrital minerals and calcium
+                carbonate. They occur both on beaches and on deeper seabed areas and are principally mined for use in
+                the construction industry. Concentrated into their present occurrences by hydrodynamic processes,
+                aggregates may have originally been deposited by mechanisms such as river or glacial deposition.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_aggregate_deposits</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-31.278939773 27.634002603</ows:LowerCorner>
+                <ows:UpperCorner>57.531711208 71.893279588</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_aggregate_deposits_pts</Name>
+            <Title>Aggregate deposits points</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on the distribution of known marine aggregate deposits in European waters. EMODnet
+                partners are submitting the spatial extent of mapped aggregate deposits and established information;
+                here you can view data collated and harmonised thus far. The aggregate deposits presented here comprise
+                near-shore deposits of non-metallic detrital minerals and calcium carbonate. They occur both on beaches
+                and deeper seabed areas. Marine aggregate deposits are principally extracted for use in the construction
+                industry. Concentrated into their present occurrences by hydrodynamic processes, aggregates may have
+                originally been deposited by mechanisms such as river or glacial deposition.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_aggregate_deposits_pts</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-31.270640632 27.635844597</ows:LowerCorner>
+                <ows:UpperCorner>56.867509096 71.779511761</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:borehole_index</Name>
+            <Title>Borehole Index</Title>
+            <Abstract>This data set is a compilation of all known marine points with geological knowledge. From this
+                index, you can get an overview on available geological knowledge for European seas together with contact
+                information for further details.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>borehole_index</ows:Keyword>
+                <ows:Keyword>boreholes</ows:Keyword>
+                <ows:Keyword>grab samples</ows:Keyword>
+                <ows:Keyword>true ground</ows:Keyword>
+                <ows:Keyword>geology</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-29.2976837158203 7.93579578399658</ows:LowerCorner>
+                <ows:UpperCorner>36.9345817565918 92.1766510009766</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:coastal_migration_22092016</Name>
+            <Title>Coastal migration</Title>
+            <Abstract>Coastal migration map of the European marine areas (e.g. Baltic Sea, the Greater North Sea, the
+                Celtic Sea, the Iberian Coast, Black Sea and the Mediterranean Sea within EU waters) at 1: 250 000
+                scale. The map is collated and harmonized from coastal migration information within the EMODNET-Geology
+                project. When no recent generalized coastline migration data were available, the coastal erosion layer
+                from the EUROSION project (www.eurosion.org) has been used. The attributes are: no nomenclature,
+                aggradation probable documented, erosion probable locally confirmed, erosion probable generalized to
+                almost the whole segment, aggradation probable locally confirmed, aggradation probable generalized to
+                almost the whole segment. These attributes are copied directly from the EUROSION coastal erosion layer.
+                In EMODnet Coastal Behavior extra attributes have been added which are erosion (coastline
+                retrogradation), accretion (coastline progradation), stable (imperceptible change). The criterion for
+                stable coastline is 0.5 meter net change per year over a 10-year period. Other fields like migration
+                rates, volume changes are not mandatory. When no information is available for these fields the attribute
+                “Nda” has been used (no data available). Accurate explanation of other fields will become available in
+                future. This final version was produced on June 9, 2011 and updated most recently on August 01, 2016.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>coastal_migration_22092016</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-24.5326753867387 34.5620280000923</ows:LowerCorner>
+                <ows:UpperCorner>60.1037000000001 75.9595000000001</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:emodnet_wp5_index</Name>
+            <Title>Coastal migration index</Title>
+            <Abstract>Quality index for Coastal migration map of the European marine areas (e.g. Baltic Sea, the Greater
+                North Sea, the Celtic Sea, the Iberian Coast, Black Sea and the Mediterranean Sea within EU waters) at
+                1: 250 000 scale. The map is collated and harmonized from coastal migration information within the
+                EMODNET-Geology project. This final version was produced on June 9, 2011 and updated most recently on
+                August 01, 2016.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>emodnet_wp5_index</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-24.5326753866597 34.5620280000922</ows:LowerCorner>
+                <ows:UpperCorner>60.1037000002549 75.9595000004247</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:cobalt_rich_ferrom_crusts</Name>
+            <Title>Cobalt rich ferromanganese crusts</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on cobalt rich ferromanganese crusts. EMODnet partners are submitting the mapped
+                extent of cobalt rich ferromanganese crusts and established information; here you can view data collated
+                thus far. Cobalt rich ferromanganese crusts are metallic mineral deposits that often form at depths
+                between 400 to 4000 metres, as thin layers on the flanks of seamounts and submarine volcanoes. The
+                crusts accumulate when manganese, iron and trace metals including cobalt, copper, nickel and platinum
+                dissolved in sea water are precipitated onto the volcanic substrate.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>cobalt_rich_ferrom_crusts</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-33.179120727 23.681989961</ows:LowerCorner>
+                <ows:UpperCorner>-1.430018136 44.254742953</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:cobalt_rich_ferrom_crusts_pts</Name>
+            <Title>Cobalt rich ferromanganese crusts points</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on cobalt rich ferromanganese crusts. EMODnet partners are submitting the mapped
+                extent of cobalt rich ferromanganese crusts and established information; here you can view data collated
+                thus far. Cobalt rich ferromanganese crusts are metallic mineral deposits that often form at depths
+                between 400 to 4000 metres, as thin layers on the flanks of seamounts and submarine volcanoes. The
+                crusts accumulate when manganese, iron and trace metals including cobalt, copper, nickel and platinum
+                dissolved in sea water are precipitated onto the volcanic substrate.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>cobalt_rich_ferrom_crusts_pts</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-33.178 23.894476849</ows:LowerCorner>
+                <ows:UpperCorner>-1.61251044400001 44.055972628</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_evaporite_deposits</Name>
+            <Title>Evaporite deposits</Title>
+            <Abstract>Evaporites are crystalline sedimentary rocks that form by the evaporation of natural brines.
+                Having complex mineralogy, there are many varieties of evaporites; the most economically important
+                minerals include: calcite, gypsum, anhydrite, halite, polyhalite, sylvite, carnallite, kainite,
+                kieserite and anhydrite. Although evaporite deposits formed in ancient marine basins are extensive on
+                land, many of these also extend beneath the sea, not only beneath the continental shelves but also under
+                some marginal ocean basins. Present day occurrences of subsea anhydrite, potash and magnesium evaporite
+                deposits have been described along the margins of the Mediterranean Sea as well as in the North Sea and
+                West Baltic Sea.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_evaporite_deposits</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-7.23627777799999 36.304444444</ows:LowerCorner>
+                <ows:UpperCorner>0.326111110999989 43.853611111</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:geological_event_distribution</Name>
+            <Title>Event distribution - polygons</Title>
+            <Abstract>Index map of all European seas reporting areas of occurrence, no occurrence and no data for each
+                kind of event in every sea. Representation refers to the item Landslide. In order to obtain information
+                on the distribution of other events click on the polygon of your interest to visualize the attributes of
+                other items.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>geological_event_distribution</ows:Keyword>
+                <ows:Keyword>Geological Event Distribution</ows:Keyword>
+                <ows:Keyword>dataprovider@Italian National Institute for Environmental Protection and Research
+                </ows:Keyword>
+                <ows:Keyword>DS_TOPIC@geoscientificinformation</ows:Keyword>
+                <ows:Keyword>continent@Europe</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-93.67110883651591 22.468154182219006</ows:LowerCorner>
+                <ows:UpperCorner>107.97890551069914 86.42967237596109</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:mud_volc_fluid_emis_pt_250k</Name>
+            <Title>Fluid emissions - points</Title>
+            <Abstract>Submarine mud-volcanoes and fluid emissions of non volcanic origin, mapped by various national and
+                regional mapping projects and recovered in the literature. Note: Project is ongoing and the work is in
+                progress; blank areas do not necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>mud_volc_fluid_emis_pt_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-63.317071882221434 24.890846416837725</ows:LowerCorner>
+                <ows:UpperCorner>61.47602672102013 72.02138108591824</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:mud_volc_fluid_emis_pol_250k</Name>
+            <Title>Fluid emissions - polygons</Title>
+            <Abstract>Submarine mud-volcanoes and fluid emissions of non volcanic origin, mapped by various national and
+                regional mapping projects and recovered in the literature. Note: Project is ongoing and the work is in
+                progress; blank areas do not necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>mud_volc_fluid_emis_pol_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-9.060952968992334 35.35067123284763</ows:LowerCorner>
+                <ows:UpperCorner>45.71321812238333 62.26857125439507</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_gas_hydrate_deposits</Name>
+            <Title>Gas hydrate deposits</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information of known gas hydrate deposits in European waters. EMODnet partners are submitting
+                the spatial extent of mapped deposits and established information; here you can view data collated thus
+                far. The information presented here are for mapped gas hydrates deposits. These deposits are typically
+                formed in stable solid state; they are mostly composed of methane (CH4), surrounded by water molecules
+                and are generally found at continental margins.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>marine_gas_hydrate_deposits</ows:Keyword>
+                <ows:Keyword>features</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-10.203443356 35.45879481</ows:LowerCorner>
+                <ows:UpperCorner>56.006990068 74.16556701</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:hydrocarbons_reservoir</Name>
+            <Title>Hydrocarbon reservoir</Title>
+            <Abstract>Hydrocarbons are organic compounds, formed over millions of years occurring mainly in sedimentary
+                basins. The most common types of hydrocarbons are petroleum, natural gas, coal and bitumen.
+                “Hydrocarbons provide the major part of the energy for modern civilisation, providing power for heating,
+                lighting telecommunications, industry and agriculture machines as well as all forms of transport and
+                also provide the raw material for numerous products ranging from plastics to fertilisers”. (Global
+                Non-Living Resources on the Extended Continental Shelf: Prospects at the Year 2000. ISA Technical Study:
+                No.1) Oil and natural gas are hydrocarbon reservoirs that occur naturally within thick sedimentary
+                sequences. These are largely confined to the continental shelves, continental slopes, continental rises,
+                and small ocean basins.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>hydrocarbons_reservoir</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-13.751182542 28.081946507</ows:LowerCorner>
+                <ows:UpperCorner>59.831027736 74.837013166</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:landslide_lin_250k</Name>
+            <Title>Landslides - lines</Title>
+            <Abstract>Submarine landslides scarps, detectable on the seabed, mapped by various national and regional
+                mapping projects and recovered in the literature. Note: Project is ongoing and the work is in progress;
+                blank areas do not necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>landslide_lin_250k</ows:Keyword>
+                <ows:Keyword>dataprovider@Italian National Institute for Environmental Protection and Research
+                </ows:Keyword>
+                <ows:Keyword>DS_TOPIC@geoscientificinformation</ows:Keyword>
+                <ows:Keyword>continent@Europe,DS_DATE@2016-07-25</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-40.787080600752795 27.847957642577477</ows:LowerCorner>
+                <ows:UpperCorner>37.444956747415794 68.98470643386153</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:landslide_pt_250k</Name>
+            <Title>Landslides - points</Title>
+            <Abstract>Submarine landslides, visible on the seabed, mapped by various national and regional mapping
+                projects and recovered in the literature. Points refer to landslide areas smaller than 60 hectares.
+                Note: Project is ongoing and the work is in progress; blank areas do not necessarily correspond to no
+                occurrence
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>landslide_pt_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>12.603731443489865 36.20965322204959</ows:LowerCorner>
+                <ows:UpperCorner>23.511401525175106 60.49593818019157</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:landslide_pol_250k</Name>
+            <Title>Landslides - polygons</Title>
+            <Abstract>Submarine landslides, detectable on the seabed, outcropping or buried, mapped by various national
+                and regional mapping projects and recovered in the literature. Locally landslides are extended on land
+                to include their origin. Note: Project is ongoing and the work is in progress; blank areas do not
+                necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>landslide_pol_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-55.58374037739735 22.533683840563373</ows:LowerCorner>
+                <ows:UpperCorner>60.048905881610644 72.36115746397245</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_placer_deposits</Name>
+            <Title>Marine placer deposits</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on marine placer deposits. EMODnet partners are submitting the spatial extent of
+                known deposits and established information; here you can view data collated thus far. The placer deposit
+                information presented here are locations with concentrations of detrital heavy metallic minerals or
+                gemstones. The occurrences of such deposits are generally limited to the continental shelf regions less
+                than 120m deep.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_placer_deposits_</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-8.93224787299999 36.51675467</ows:LowerCorner>
+                <ows:UpperCorner>24.339524887 57.775940487</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_placer_deposits_pts</Name>
+            <Title>Marine placer deposits points</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on marine placer deposits. EMODnet partners are submitting the spatial extent of
+                known deposits and established information; here you can view data collated thus far. The placer deposit
+                information presented here are locations with concentrations of detrital heavy metallic minerals or
+                gemstones. The occurrences of such deposits are generally limited to the continental shelf regions less
+                than 120m deep.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_placer_deposits_pts</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-8.77172393699999 36.736918308</ows:LowerCorner>
+                <ows:UpperCorner>24.211661858 57.752126334</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_phosphorite_deposits</Name>
+            <Title>Phosphorite deposits</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on phosphorite deposits. EMODnet partners are submitting the spatial extent of
+                mapped deposits and established information; here you can view data collated thus far. Phosphorite
+                deposits are found in sedimentary rocks, sufficiently rich in phosphate minerals. Phospherites are
+                authigenic mineral deposits, formed in situ on the sea floor; they generally occur in deeper waters than
+                placer deposits and are primarily used in the phosphate fertiliser industry.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_phosphorite_deposits</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-20.889144257 23.681989961</ows:LowerCorner>
+                <ows:UpperCorner>-4.080443613 44.331863974</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_phosphorite_deposit_pts</Name>
+            <Title>Phosphorite deposits points</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on phosphorite deposits. EMODnet partners are submitting the spatial extent of
+                mapped deposits and established information; here you can view data collated thus far. Phosphorite
+                deposits are found in sedimentary rocks, sufficiently rich in phosphate minerals. Phospherites are
+                authigenic mineral deposits, formed in situ on the sea floor; they generally occur in deeper waters than
+                placer deposits and are primarily used in the phosphate fertiliser industry.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_phosphorite_deposit_pts</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-20.710797917 23.894476849</ows:LowerCorner>
+                <ows:UpperCorner>-4.62749489499998 44.055972628</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_polymetallic_nodules</Name>
+            <Title>Polymetallic nodules</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on Polumetallic nodules. EMODnet partners are submitting the spatial extent of
+                mapped polymetallic nodules and existing information; here you can view data collated thus far. The
+                information presented here are of mapped extents of polymetallic nodules within participating surveys
+                national EEZ. Polymetallic nodules are also known as manganese nodules. These ferromanganese concretions
+                comprise mainly iron and ferromanganese oxides, with accessory minerals such as cobalt, copper and
+                nickel, zinc, vanadium, platinum and molybdenum.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_polymetallic_nodules</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-12.103974983 36.055178082</ows:LowerCorner>
+                <ows:UpperCorner>33.38992 65.175274191</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_polymetallic_nodules_pt</Name>
+            <Title>Polymetallic nodules points</Title>
+            <Abstract>The GSI, as partner and Work Package 7 (Minerals) leader of EMODnet Geology Phase II, are
+                compiling information on Polumetallic nodules. EMODnet partners are submitting the spatial extent of
+                mapped polymetallic nodules and existing information; here you can view data collated thus far. The
+                information presented here are of mapped extents of polymetallic nodules within participating surveys
+                national EEZ. Polymetallic nodules are also known as manganese nodules. These ferromanganese concretions
+                comprise mainly iron and ferromanganese oxides, with accessory minerals such as cobalt, copper and
+                nickel, zinc, vanadium, platinum and molybdenum.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>marine_polymetallic_nodules_pt</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-11.76662589 36.171567424</ows:LowerCorner>
+                <ows:UpperCorner>32.945901 65.175094811</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:marine_polymetallic_sulphides</Name>
+            <Title>Polymetallic sulphides PMS</Title>
+            <Abstract>The GSI, as partner and Work Package 7 Minerals leader of EMODnet Geology Phase II, are compiling
+                information on Polymetallic sulphides PMS. EMODnet partners are submitting mapped PMS locations and
+                existing information, here you can view data collated thus far. The PMS information presented here are
+                of mapped PMS locations. Also known as Volcanogenic Massive Sulfides (VMS), Seafloor Massive Sulfides
+                (SMS) and Black Smokers, PMS are base metal sulfur-rich mineral deposits. They occur along the earth’s
+                major tectonic belts at spreading centres, as well as in intraplate regions where islands and seamounts
+                are formed.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>marine_polymetallic_sulphides</ows:Keyword>
+                <ows:Keyword>features</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-33.883333333 27.330289646</ows:LowerCorner>
+                <ows:UpperCorner>-11.666 67.083000004</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:seafloor_event_environment</Name>
+            <Title>Sea-floor Event Environment</Title>
+            <Abstract>Compilation of the sea-floor geology (bedrock) of the European Seas, semantically harmonized using
+                the INSPIRE data specifications for lithology, age, event environment, event process. Project partners
+                are the national geological survey organizations of the participating countries. Most detailed available
+                data compilation of the European Seas using a multi-resolution approach. Data completeness depending on
+                the availability of data and actual mapping campaigns (status Sept. 2016).
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>seafloor_event_environment</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-31.116258167 23.68047218</ows:LowerCorner>
+                <ows:UpperCorner>60.1037000000001 80.0002283160001</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <MetadataURL type="19115" format="text/xml">
+                https://produktcenter.bgr.de/soapServices/CSWStartup?request=GetRecordById&amp;service=CSW&amp;version=2.0.2&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full&amp;id=b91e3096-83dc-4439-877c-9636a69ea74b
+            </MetadataURL>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:seafloor_event_process</Name>
+            <Title>Sea-floor Event Process</Title>
+            <Abstract>Compilation of the sea-floor geology (bedrock) of the European Seas, semantically harmonized using
+                the INSPIRE data specifications for lithology, age, event environment, event process. Project partners
+                are the national geological survey organizations of the participating countries. Most detailed available
+                data compilation of the European Seas using a multi-resolution approach. Data completeness depending on
+                the availability of data and actual mapping campaigns (status Sept. 2016).
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>seafloor_event_process</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-31.116258167 23.68047218</ows:LowerCorner>
+                <ows:UpperCorner>60.1037000000001 80.0002283160001</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <MetadataURL type="19115" format="text/xml">
+                https://produktcenter.bgr.de/soapServices/CSWStartup?request=GetRecordById&amp;service=CSW&amp;version=2.0.2&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full&amp;id=b91e3096-83dc-4439-877c-9636a69ea74b
+            </MetadataURL>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:seafloor_lithology</Name>
+            <Title>Sea-floor Lithology</Title>
+            <Abstract>This map was derived and compiled from many larger scale data sources and has thus been
+                generalized. It represents the lithology of marine bedrock of the IGME 5000 GIS and database at the time
+                of plotting. The geological feature types are transferred after the OneGeology-Europe requirements,
+                especially lithology was mapped into 1GE_Lithology. The download package contains all data used for the
+                four layers under “Sea-floor (bedrock)” on the map page.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>seafloor_lithology</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-31.116258167 23.68047218</ows:LowerCorner>
+                <ows:UpperCorner>60.1037000000001 80.0002283160001</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <MetadataURL type="19115" format="text/xml">
+                https://produktcenter.bgr.de/soapServices/CSWStartup?request=GetRecordById&amp;service=CSW&amp;version=2.0.2&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full&amp;id=b91e3096-83dc-4439-877c-9636a69ea74b
+            </MetadataURL>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:seafloor_stratigraphy</Name>
+            <Title>Sea-floor Stratigraphy</Title>
+            <Abstract>This map was derived and compiled from many larger scale data sources and has thus been
+                generalized. It represents the stratigraphic units of marine bedrock of the IGME 5000 GIS and database
+                at the time of plotting. The geological feature types are transferred after the OneGeology-Europe
+                requirements, especially stratigraphic units was mapped into 1GE_Startigraphy according to the ICS 2009.
+                The download package contains all data used for the four layers under “Sea-floor (bedrock)” on the map
+                page.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>seafloor_stratigraphy</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:4326</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-31.116258167 23.68047218</ows:LowerCorner>
+                <ows:UpperCorner>60.1037000000001 80.0002283160001</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+            <MetadataURL type="19115" format="text/xml">
+                https://produktcenter.bgr.de/soapServices/CSWStartup?request=GetRecordById&amp;service=CSW&amp;version=2.0.2&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;elementSetName=full&amp;id=b91e3096-83dc-4439-877c-9636a69ea74b
+            </MetadataURL>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:seabed_accumulation_rates</Name>
+            <Title>Seabed Accumulation Rates</Title>
+            <Abstract>Sedimentation rate map of the European Seas (e.g. the Baltic Sea, the North Sea, the Barents Sea,
+                the sea around Iceland, the Iberian Coast, the Western Mediterranean Sea (within EU waters), the
+                Adriatic Sea, the Ionian Sea and the Central Mediterranean Sea (within EU waters), the Aegean-Levantine
+                Sea (within EU waters – including the Turkish sector) and the Black Sea.&#13;
+                &#13;
+                The map is collated and compiled within the EMODnet-Geology project. Estimations of modern sedimentation
+                rates (cm/year) are based mainly on the 137Cs and the 210Pb dating. The 137Cs could be used as a
+                time-marker in the sediment column. In the sediment column the activity peak of 137Cs corresponds to the
+                fallout of the Chernobyl nuclear power plant accident of April 1986. Some sedimentation rates were
+                estimated from acoustic-seismic and sediment core data.&#13;
+                &#13;
+                This version was produced October 10th, 2016.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>seabed_accumulation_rates</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-33.88659442742966 28.026067491713544</ows:LowerCorner>
+                <ows:UpperCorner>77.14603951638234 72.31057365903384</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:seabed_substrate_100k</Name>
+            <Title>Seabed Substrates 1:100k</Title>
+            <Abstract>Seabed substrate map of the European marine areas including (e.g. the Baltic Sea, the Greater
+                North Sea, the Celtic Sea, the Iberian Coast, and the Mediterranean Sea within EU waters) at 1:100 000
+                scale (100k). The map is collated and harmonized from seabed substrate information within the
+                EMODnet-Geology III project.&#13;
+                &#13;
+                Where necessary, the existing seabed substrate classifications (of individual maps) have been translated
+                to a scheme that is supported by EUNIS. This EMODnet reclassification scheme includes at least five
+                seabed substrate classes. Four substrate classes are defined on the basis of the modified Folk triangle
+                (mud to sandy mud; sand; coarse sediment; and mixed sediment) and one additional substrate class (rock
+                and boulders) was included by the project team. If the original seabed substrate dataset has enabled
+                more detailed substrate classification, classifications with 7 and 16 substrate classes might be
+                available.&#13;
+                &#13;
+                The EMODnet-Geology III project started in 2017 with 39 marine departments of the geological surveys of
+                Europe (from 30 countries), with an objective to assemble marine geological information from all
+                European sea areas. The seabed substrate map was produced in March 2018.&#13;
+                &#13;
+                Note: The data may include some errors e.g. data discontinuities.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>seabed_substrate_100k</ows:Keyword>
+                <ows:Keyword>features</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-76.38278925153163 28.361446968328256</ows:LowerCorner>
+                <ows:UpperCorner>99.47616767497311 84.68178512079066</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:seabed_substrate_1m</Name>
+            <Title>Seabed Substrates 1:1M</Title>
+            <Abstract>Seabed substrate map of the European sea areas (e.g. the Baltic Sea, the Barents Sea, the Greater
+                North Sea, the Celtic Sea, the Iberian Coast, the White Sea, and the Mediterranean Sea within EU waters)
+                at 1: 1 000 000 scale (1M). The map is collated and harmonized from seabed substrate information within
+                the EMODnet-Geology project.&#13;
+                &#13;
+                The map is collated from the 1M data from Partners and generalized 1:250k EMODnet data. Where necessary,
+                the existing substrate classifications (of individual maps) have been translated to a scheme that is
+                supported by EUNIS. This EMODnet reclassification scheme consists of altogether five seabed substrate
+                classes.&#13;
+                &#13;
+                Four substrate classes are defined on the basis of the modified Folk triangle (mud to sandy mud; sand;
+                coarse sediment; and mixed sediment) and one additional substrate class (rock and boulders) was included
+                by the project team. If the original seabed substrate dataset has enabled more detailed substrate
+                classification, classifications with 7 and 16 substrate classes might be available. The seabed substrate
+                map was produced October 2016.&#13;
+                &#13;
+                Note: The data may include some errors e.g. overlays, topological gaps and data discontinuities.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>seabed_substrate_1m</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-82.40209697267976 23.65459937741197</ows:LowerCorner>
+                <ows:UpperCorner>95.97900287601549 83.98120338822137</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:seabed_substrate_250k</Name>
+            <Title>Seabed Substrates 1:250k</Title>
+            <Abstract>Seabed substrate map of the European marine areas including (e.g. the Baltic Sea, the Greater
+                North Sea, the Celtic Sea, the Iberian Coast, and the Mediterranean Sea within EU waters) at 1: 250 000
+                scale (250k). The map is collated and harmonized from seabed substrate information within the
+                EMODnet-Geology project.&#13;
+                &#13;
+                Where necessary, the existing seabed substrate classifications (of individual maps) have been translated
+                to a scheme that is supported by EUNIS. This EMODnet reclassification scheme includes at least five
+                seabed substrate classes. Four substrate classes are defined on the basis of the modified Folk triangle
+                (mud to sandy mud; sand; coarse sediment; and mixed sediment) and one additional substrate class (rock
+                and boulders) was included by the project team. If the original seabed substrate dataset has enabled
+                more detailed substrate classification, classifications with 7 and 16 substrate classes might be
+                available.&#13;
+                &#13;
+                The EMODnet-Geology project started in 2013 with 36 marine departments of the geological surveys of
+                Europe (from 30 countries), with an objective to assemble marine geological information from all
+                European sea areas. The seabed substrate map was produced October 2016.&#13;
+                &#13;
+                Note: The data may include some errors e.g. data discontinuities.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>seabed_substrate_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-58.46602277721213 23.65459937741197</ows:LowerCorner>
+                <ows:UpperCorner>63.91759355993472 73.80925578217283</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:quaternary_tectonics_lin_250k</Name>
+            <Title>Tectonic lines</Title>
+            <Abstract>Submarine tectonic lines, mapped by various national and regional mapping projects and recovered
+                in the literature. Note: Project is ongoing and the work is in progress; blank areas do not necessarily
+                correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>quaternary_tectonics_lin_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-57.874504092648785 26.201980835135576</ows:LowerCorner>
+                <ows:UpperCorner>57.07919050094289 70.31683481628862</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:tsunami_pt2_250k</Name>
+            <Title>Tsunami affected coast - points</Title>
+            <Abstract>Locations of the main points along the coasts affected by tsunamis whose origin is unknown, mapped
+                by various national and regional mapping projects and recovered in the literature. Note: Project is
+                ongoing and the work is in progress; blank areas do not necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>tsunami_pt2_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-10.720744371369364 32.91351278954318</ows:LowerCorner>
+                <ows:UpperCorner>47.323571874912105 61.18893147021747</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:tsunami_pt_250k</Name>
+            <Title>Tsunami origin - points</Title>
+            <Abstract>Locations of events which originated tsunamis, mapped by various national and regional mapping
+                projects and recovered in the literature. Where possible, connected events reported in other EMODnet
+                Geology layers are indicated. Note: Project is ongoing and the work is in progress; blank areas do not
+                necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>tsunami_pt_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-56.299179399458154 24.03398296369526</ows:LowerCorner>
+                <ows:UpperCorner>26.112937691415446 64.32643427524232</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:volcanic_center_lin_250k</Name>
+            <Title>Volcanoes - lines</Title>
+            <Abstract>Submarine volcanoes, mapped by various national and regional mapping projects and recovered in the
+                literature. Lines refer to eruptive fissures or borders of lava flows. Note: Project is ongoing and the
+                work is in progress; blank areas do not necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>volcanic_center_lin_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-32.21747183192457 61.19562829549885</ows:LowerCorner>
+                <ows:UpperCorner>-14.873665879204431 67.58293638736792</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:volcanic_center_pt_250k</Name>
+            <Title>Volcanoes - points</Title>
+            <Abstract>Submarine volcanoes, mapped by various national and regional mapping projects and recovered in the
+                literature. Points refer to specific morphotypes or areas smaller than 60 hectares. Note: Project is
+                ongoing and the work is in progress; blank areas do not necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>volcanic_center_pt_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-58.75139511587369 24.636228328639366</ows:LowerCorner>
+                <ows:UpperCorner>52.48829806176906 71.79127672857533</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+        <FeatureType xmlns:EMODnetGeology="emodnetgeology">
+            <Name>EMODnetGeology:volcanic_center_pol_250k</Name>
+            <Title>Volcanoes - polygons</Title>
+            <Abstract>Submarine volcanoes, mapped by various national and regional mapping projects and recovered in the
+                literature. Locally occurrences include their emerged portions. Note: Project is ongoing and the work is
+                in progress; blank areas do not necessarily correspond to no occurrence.
+            </Abstract>
+            <ows:Keywords>
+                <ows:Keyword>features</ows:Keyword>
+                <ows:Keyword>volcanic_center_pol_250k</ows:Keyword>
+            </ows:Keywords>
+            <DefaultSRS>urn:x-ogc:def:crs:EPSG:3034</DefaultSRS>
+            <ows:WGS84BoundingBox>
+                <ows:LowerCorner>-51.81061421611757 23.38566469554012</ows:LowerCorner>
+                <ows:UpperCorner>44.588271532784276 69.23867472887594</ows:UpperCorner>
+            </ows:WGS84BoundingBox>
+        </FeatureType>
+    </FeatureTypeList>
+    <ogc:Filter_Capabilities>
+        <ogc:Spatial_Capabilities>
+            <ogc:GeometryOperands>
+                <ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand>
+                <ogc:GeometryOperand>gml:Point</ogc:GeometryOperand>
+                <ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand>
+                <ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>
+            </ogc:GeometryOperands>
+            <ogc:SpatialOperators>
+                <ogc:SpatialOperator name="Disjoint"/>
+                <ogc:SpatialOperator name="Equals"/>
+                <ogc:SpatialOperator name="DWithin"/>
+                <ogc:SpatialOperator name="Beyond"/>
+                <ogc:SpatialOperator name="Intersects"/>
+                <ogc:SpatialOperator name="Touches"/>
+                <ogc:SpatialOperator name="Crosses"/>
+                <ogc:SpatialOperator name="Within"/>
+                <ogc:SpatialOperator name="Contains"/>
+                <ogc:SpatialOperator name="Overlaps"/>
+                <ogc:SpatialOperator name="BBOX"/>
+            </ogc:SpatialOperators>
+        </ogc:Spatial_Capabilities>
+        <ogc:Scalar_Capabilities>
+            <ogc:LogicalOperators/>
+            <ogc:ComparisonOperators>
+                <ogc:ComparisonOperator>LessThan</ogc:ComparisonOperator>
+                <ogc:ComparisonOperator>GreaterThan</ogc:ComparisonOperator>
+                <ogc:ComparisonOperator>LessThanEqualTo</ogc:ComparisonOperator>
+                <ogc:ComparisonOperator>GreaterThanEqualTo</ogc:ComparisonOperator>
+                <ogc:ComparisonOperator>EqualTo</ogc:ComparisonOperator>
+                <ogc:ComparisonOperator>NotEqualTo</ogc:ComparisonOperator>
+                <ogc:ComparisonOperator>Like</ogc:ComparisonOperator>
+                <ogc:ComparisonOperator>Between</ogc:ComparisonOperator>
+                <ogc:ComparisonOperator>NullCheck</ogc:ComparisonOperator>
+            </ogc:ComparisonOperators>
+            <ogc:ArithmeticOperators>
+                <ogc:SimpleArithmetic/>
+                <ogc:Functions>
+                    <ogc:FunctionNames>
+                        <ogc:FunctionName nArgs="1">abs</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">abs_2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">abs_3</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">abs_4</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">acos</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">AddCoverages</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">Affine</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">Aggregate</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Area</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">area2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">AreaGrid</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">asin</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">atan</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">atan2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">attributeCount</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">BandMerge</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">BandSelect</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-6">BarnesSurface</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">between</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">boundary</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">boundaryDimension</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Bounds</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">buffer</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">BufferFeatureCollection</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">bufferWithSegments</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="7">Categorize</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">ceil</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">centroid</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">classify</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">Clip</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">CollectGeometries</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Collection_Average</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Collection_Bounds</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="0">Collection_Count</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Collection_Max</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Collection_Median</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Collection_Min</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Collection_Nearest</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Collection_Sum</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Collection_Unique</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">Concatenate</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">contains</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">Contour</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">convert</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">convexHull</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">ConvolveCoverage</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">cos</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">Count</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">CoverageClassStats</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">CropCoverage</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">crosses</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">dateFormat</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">dateParse</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">difference</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">dimension</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">disjoint</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">disjoint3D</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">distance</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">distance3D</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">double2bool</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">endAngle</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">endPoint</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">env</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">envelope</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">EqualInterval</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">equalsExact</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">equalsExactTolerance</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">equalTo</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">exp</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">exteriorRing</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">Feature</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">FeatureClassStats</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">floor</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="0">geometry</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">geometryType</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">geomFromWKT</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">geomLength</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">getGeometryN</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">getX</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">getY</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">getz</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">greaterEqualThan</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">greaterThan</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-3">Grid</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-5">Heatmap</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="0">id</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">IEEEremainder</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">if_then_else</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">in</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="11">in10</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">in2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="4">in3</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="5">in4</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="6">in5</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="7">in6</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="8">in7</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="9">in8</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="10">in9</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">InclusionFeatureCollection</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">int2bbool</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">int2ddouble</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">interiorPoint</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">interiorRingN</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-5">Interpolate</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">intersection</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">IntersectionFeatureCollection</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">intersects</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">intersects3D</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">isClosed</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="0">isCoverage</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">isEmpty</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">isInstanceOf</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">isLike</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">isNull</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">isometric</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">isRing</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">isSimple</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">isValid</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">isWithinDistance</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">isWithinDistance3D</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">Jenks</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">length</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">lessEqualThan</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">lessThan</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">list</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">log</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="4">LRSGeocode</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-4">LRSMeasure</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="5">LRSSegment</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">max</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">max_2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">max_3</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">max_4</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">min</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">min_2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">min_3</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">min_4</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">mincircle</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">minimumdiameter</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">minrectangle</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">modulo</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">MultiplyCoverages</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">Nearest</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">NormalizeCoverage</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">not</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">notEqualTo</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">numberFormat</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="5">numberFormat2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">numGeometries</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">numInteriorRing</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">numPoints</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">octagonalenvelope</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">offset</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">overlaps</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">parameter</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">parseBoolean</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">parseDouble</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">parseInt</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">parseLong</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="0">pi</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">PointBuffers</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">pointN</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-6">PointStacker</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">PolygonExtraction</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">pow</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">property</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">PropertyExists</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">Quantile</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">Query</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="0">random</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">RangeLookup</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">RasterAsPointCollection</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">RasterZonalStatistics</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-6">RasterZonalStatistics2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="5">Recode</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">RectangularClip</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">relate</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">relatePattern</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">Reproject</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-3">rescaleToPixels</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">rint</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">round</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">round_2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">roundDouble</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-5">ScaleCoverage</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">setCRS</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">Simplify</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">sin</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-2">Snap</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">sqrt</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">StandardDeviation</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">startAngle</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">startPoint</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">strCapitalize</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">strConcat</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">strEndsWith</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">strEqualsIgnoreCase</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">strIndexOf</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="4">stringTemplate</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">strLastIndexOf</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">strLength</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">strMatches</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">strPosition</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="4">strReplace</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">strStartsWith</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">strSubstring</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">strSubstringStart</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">strToLowerCase</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">strToUpperCase</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">strTrim</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">strTrim2</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-1">strURLEncode</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">StyleCoverage</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">symDifference</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">tan</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">toDegrees</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">toRadians</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">touches</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">toWKT</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">Transform</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">TransparencyFill</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">union</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">UnionFeatureCollection</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">Unique</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">UniqueInterval</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="-4">VectorToRaster</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="3">VectorZonalStatistics</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="1">vertices</ogc:FunctionName>
+                        <ogc:FunctionName nArgs="2">within</ogc:FunctionName>
+                    </ogc:FunctionNames>
+                </ogc:Functions>
+            </ogc:ArithmeticOperators>
+        </ogc:Scalar_Capabilities>
+        <ogc:Id_Capabilities>
+            <ogc:FID/>
+            <ogc:EID/>
+        </ogc:Id_Capabilities>
+    </ogc:Filter_Capabilities>
+</wfs:WFS_Capabilities>

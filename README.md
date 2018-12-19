@@ -1,50 +1,32 @@
-# Open Sea Lab
+# EMODNet Query Tool Web Service
 
-A web application to visualize marine data.
+## About
 
-Our application, named Open Sea Lab, is a collaboration with open Summer of code, the Flanders Marine Institute, and the European Marine Observation and Data Networks group. 
+This application serves as a cache for various emodnet GIS features. It is also able to 
+calculate some statistics on point and polygon layers.
 
-Our application lets researchers, students, and policymakers explore marine data via an easy to use map interface. 
+## Build
 
-<img src="README_screenshot.png" alt="My cool logo"/>
+Assuming you have maven 3 installed and a Java11 installed run
 
+    $ mvn clean install
+    
+ This will build the project and create a war file for deployment in a servlet container
+ like Tomcat8.
+ 
+## Running
+ 
+ If you do not wish to deploy this app in a serlvet container it can be run stand-alone.
+ 
+    $ java -jar ./server/target/query-tool-SNAPSHOT-1.0.jar
+    
+## Deployment
+To deploy the webapp in a servlet container just copy the into the webapps 
+directory of the servlet container.
 
-## Getting Started
-
-Get the sever from vliz/OpenSeaLab/src/main/Main.java started and then open OpenSeaLab/src/main/Index.html in your browser to get started. 
-
-### Prerequisites
-
-Make sure you have the following programs.
-
-* Jetty : jetty-9.3.2.v20150730
-* Java : openjdk version "1.8.0_171" 
-
-
-## Layers Currently Worked On
-
-### 1) Bathymetry
-
-WMS calls are made for data layers called "mean","mean_rainbowcolour","mean_multicolour","mean_atlas_land","source_references","contours", and "products". These will be displayed over the entire map.
-
-Original portal:	http://portal.emodnet-bathymetry.eu/
-					http://portal.emodnet-bathymetry.eu/services/
-
-### 2) Seabed Habitats
-
-WFS calls are made to the EMODnet severs to collect vector data for the types of sediment at the seafloor. This will display clipped polygons for the user selected rectangle on the map.
-
-Original portal:	http://www.emodnet-seabedhabitats.eu
-
-### 3) Geology
-
-WFS calls are made to the EMODnet severs to collect vector data for the types of sediment at the seafloor, similar to seabed habitats. This will display clipped polygons for the user selected rectangle on the map.
-
-Original portal:	http://www.emodnet-geology.eu
-
-## Direct access to data
-Here is a website where you can directly download data to use (without waiting)
-http://www.emodnet.eu/geonetwork/emodnet/eng/catalog.search#/home
-The dataset is also sorted  by topics: Oceans, Geo information, boundaries, biota, economy, planning cadastre, environment, etc
-
-
+    $ cp ./webapp/target/query-tool-webapp-SNAPSHOT-1.0.war /var/lib/tomcat8/webapps 
+    
+## API documentation
+ 
+ Documentation on the REST interface is available from 
+ http://localhost:8080/eqt/docs/index.html
