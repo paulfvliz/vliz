@@ -11,4 +11,5 @@ OpenSeaLab/www/map.html
 OpenSeaLab/geology.json
 target
 .idea
-
+dependency-reduced-pom.xml
+log
