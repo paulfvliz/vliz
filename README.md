@@ -7,7 +7,7 @@ calculate some statistics on point and polygon layers.
 
 ## Build
 
-Assuming you have maven 3 installed and a Java11 installed run
+Assuming you have maven 3 installed and at least Java8 installed run
 
     $ mvn clean install
     
@@ -18,7 +18,7 @@ Assuming you have maven 3 installed and a Java11 installed run
  
  If you do not wish to deploy this app in a serlvet container it can be run stand-alone.
  
-    $ java -jar ./server/target/query-tool-SNAPSHOT-1.0.jar
+    $ java -jar ./server/target/query-tool-server-SNAPSHOT-1.0.jar
     
 ## Deployment
 To deploy the webapp in a servlet container just copy the into the webapps 
@@ -29,4 +29,4 @@ directory of the servlet container.
 ## API documentation
  
  Documentation on the REST interface is available from 
- http://localhost:8080/eqt/docs/index.html
+ http://localhost:8080/querytool/docs/index.html
