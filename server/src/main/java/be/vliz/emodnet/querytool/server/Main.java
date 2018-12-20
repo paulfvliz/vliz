@@ -73,7 +73,7 @@ public class Main {
 
 		context.setResourceBase(Main.class.getResource("/www").toString());
 
-		ServletHolder servletHolder = context.addServlet(ServletContainer.class, "/eqt/*");
+		ServletHolder servletHolder = context.addServlet(ServletContainer.class, "/querytool/*");
 		servletHolder.setInitOrder(0);
 		servletHolder.setInitParameter("javax.ws.rs.Application", App.class.getCanonicalName());
 		servletHolder.setInitParameter(
