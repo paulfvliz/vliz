@@ -54,19 +54,6 @@
       <scope>runtime</scope>
     </dependency>
 
-    <!--dependency>
-      <groupId>javax.xml.bind</groupId>
-      <artifactId>jaxb-api</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.xml.bind</groupId>
-      <artifactId>jaxb-impl</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.sun.istack</groupId>
-      <artifactId>istack-commons-runtime</artifactId>
-    </dependency-->
-
     <dependency>
       <groupId>com.owlike</groupId>
       <artifactId>genson</artifactId>
@@ -156,4 +143,24 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>java-11</id>
+      <dependencies>
+        <dependency>
+           <groupId>javax.xml.bind</groupId>
+           <artifactId>jaxb-api</artifactId>
+         </dependency>
+         <dependency>
+           <groupId>com.sun.xml.bind</groupId>
+           <artifactId>jaxb-impl</artifactId>
+         </dependency>
+         <dependency>
+           <groupId>com.sun.istack</groupId>
+           <artifactId>istack-commons-runtime</artifactId>
+         </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
 </project>

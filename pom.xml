@@ -20,7 +20,6 @@
     <jersey.version>2.27</jersey.version>
     <glassfish.version>2.5.0-b42</glassfish.version>
     <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
@@ -82,11 +81,6 @@
             <groupId>org.glassfish.hk2.external</groupId>
           </exclusion>
         </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.glassfish.hk2.external</groupId>
-        <artifactId>javax.inject</artifactId>
-        <version>${glassfish.version}</version>
       </dependency>
       <dependency>
         <groupId>org.glassfish.hk2.external</groupId>
@@ -217,4 +211,25 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <profiles>
+    <profile>
+      <id>java-1.8</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+      </properties>
+    </profile>
+    <profile>
+      <id>java-11</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <maven.compiler.target>11</maven.compiler.target>
+      </properties>
+    </profile>
+  </profiles>
 </project>
