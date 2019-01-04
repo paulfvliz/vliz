@@ -71,8 +71,6 @@ public class Main {
 		Server server = new Server(Integer.parseInt(appContext.getProperty(("port"))));
 		server.setHandler(context);
 
-		context.setResourceBase(Main.class.getResource("/www").toString());
-
 		ServletHolder servletHolder = context.addServlet(ServletContainer.class, "/querytool/*");
 		servletHolder.setInitOrder(0);
 		servletHolder.setInitParameter("javax.ws.rs.Application", App.class.getCanonicalName());
