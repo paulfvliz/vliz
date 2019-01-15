@@ -1,5 +1,7 @@
 package be.vliz.emodnet.querytool.core.model.feature;
 
+import be.vliz.emodnet.querytool.core.model.Statistics;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FeatureCollection implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2257120673609525062L;
 	private final List<Feature> features;
 
 	public FeatureCollection(List<Feature> features) {
@@ -56,39 +58,11 @@ public class FeatureCollection implements Serializable {
 		return new FeatureCollection(features);
 	}
 
-	/**
-	 * Will calculate the total area of each kind of surface and save that into
-	 * 'totalsToBeFilled'. The total surface is returned
-	 * 
-	 * @return
-	 */
-	public SurfaceCount calculateTotals(String dividingProperty) {
-		double total = 0.0;
-		HashMap<String, Double> parts = new HashMap<>();
-		parts.put("points", 0.0);
-		for (Feature f : features) {
-			Geometry geo = f.getGeometry();
-			if (geo == null)
-				continue;
-
-			Map<String, Object> m = f.getProperties();
-			String name = (String) m.get(dividingProperty); // used "AllcombD" previously
-			Double s = parts.getOrDefault(name, 0.0);
-			double featureTotal = 0.0;
-
-			if (geo.getType().equals("Point")) {
-				featureTotal = parts.getOrDefault("points", 0.0) + 1.0;
-				//parts.put("points", featureTotal);
-			} else {
-				featureTotal = geo.surfaceArea();
-				if (Double.isNaN(featureTotal)) {
-					continue;
-				}
-			}
-			parts.put(name, s + featureTotal);
-			total += featureTotal;
-		}
-		return new SurfaceCount(total, parts);
+	public Statistics calculateTotals(String dividingPropery) {
+		return Statistics.builder()
+			.dividingProperty(dividingPropery)
+			.add(this)
+			.build();
 	}
 
 	public FeatureCollection joinWith(FeatureCollection fc) {

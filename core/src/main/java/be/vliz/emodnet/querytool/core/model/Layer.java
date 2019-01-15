@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Layer implements Serializable{
-	private static final long serialVersionUID = 1l;
+	private static final long serialVersionUID = 168489331194062745L;
 
 	public static final String PARAM_TYPE = "type";
 	public static final String PARAM_REQ_TYPE = "requestType";
@@ -32,7 +32,10 @@ public class Layer implements Serializable{
 		this.defaultDividor = defaultDividor;
 		this.bbox = bbox;
 
-		this.defaultParams = new HashMap<String, String>() {{
+		this.defaultParams = new HashMap<String, String>() {
+			private static final long serialVersionUID = 168489331194062795L;
+
+			{
 			put(PARAM_TYPE, defaultType);
 			put(PARAM_REQ_TYPE, DEFAULT_REQUEST_TYPE);
 			put("bbox", Util.rectangleToBBoxString(bbox));

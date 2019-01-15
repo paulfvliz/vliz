@@ -75,13 +75,13 @@ public class FeatureTypeController {
 			@QueryParam("geomType") @DefaultValue("polygon") String geomType) {
 
 		FeatureType featureType = getFeature(layerName, featureName);
-		HashMap<String, Double> percentages = layerProvider.retrieveStats(
+		Statistics statistics =  layerProvider.retrieveStats(
 				new Rectangle(latmin, lonmin, latmax, lonmax),
 				featureType,
 				divider == null ? featureType.getLayer().getDefaultDividor() : divider,
-				geomType).calculatePercentages();
+				geomType);
 
-		return new Statistics(percentages);
+		return statistics;
 	}
 
 	@Path("data")

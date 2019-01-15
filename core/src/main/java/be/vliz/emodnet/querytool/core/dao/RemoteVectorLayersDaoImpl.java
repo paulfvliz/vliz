@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 public class RemoteVectorLayersDaoImpl implements Serializable, VectorLayersDao {
 	private static final Logger LOGGER = Logger.getLogger(RemoteVectorLayersDaoImpl.class.getName());
+	private static final long serialVersionUID = -5455856142706071793L;
 
 	/**
 	 * Constructs a data object access to retrieve data from the remote server.
@@ -118,13 +119,11 @@ public class RemoteVectorLayersDaoImpl implements Serializable, VectorLayersDao 
 	}
 
 	private String getFormattedURL(Rectangle bbox, FeatureType type, String requestType) {
-		Map<String,String> props = new HashMap<String, String>() {{
-			put("bbox", Util.rectangleToBBoxString(bbox));
-			put(Layer.PARAM_TYPE, type.getName());
-			put(Layer.PARAM_REQ_TYPE, requestType);
-		}};
+		Map<String,String> props = new HashMap<String, String>();
+    props.put("bbox", Util.rectangleToBBoxString(bbox));
+    props.put(Layer.PARAM_TYPE, type.getName());
+    props.put(Layer.PARAM_REQ_TYPE, requestType);
 		return type.getLayer().resolveUrl(props);
-
 	}
 
 }

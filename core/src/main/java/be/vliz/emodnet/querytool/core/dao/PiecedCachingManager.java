@@ -1,6 +1,7 @@
 package be.vliz.emodnet.querytool.core.dao;
 
 import be.vliz.emodnet.querytool.core.exceptions.BizzException;
+import be.vliz.emodnet.querytool.core.model.Statistics;
 import be.vliz.emodnet.querytool.core.model.feature.FeatureCollection;
 import be.vliz.emodnet.querytool.core.model.feature.Rectangle;
 import be.vliz.emodnet.querytool.core.model.feature.Square;
@@ -20,7 +21,7 @@ public class PiecedCachingManager implements LayerProvider {
 	private static final Logger LOGGER = Logger.getLogger(PiecedCachingManager.class.getName());
 	private final VectorLayersDao nonCacheProvider;
 	private final Cache<DataCacheKey, FeatureCollection> dataCache;
-	private final Cache<DataCacheKey, SurfaceCount> statsCache;
+	private final Cache<DataCacheKey, Statistics> statsCache;
 
 	private AtomicInteger squaresDone = new AtomicInteger(0);
 
@@ -28,7 +29,7 @@ public class PiecedCachingManager implements LayerProvider {
 	public PiecedCachingManager(VectorLayersDao nonCacheProvider, CacheManager cacheManager) {
 		this.nonCacheProvider = nonCacheProvider;
 		dataCache = cacheManager.getCache("featureData", DataCacheKey.class, FeatureCollection.class);
-		statsCache = cacheManager.getCache("featureStats", DataCacheKey.class, SurfaceCount.class);
+		statsCache = cacheManager.getCache("featureStats", DataCacheKey.class, Statistics.class);
 
 	}
 
@@ -74,9 +75,9 @@ public class PiecedCachingManager implements LayerProvider {
 		return retrieve(bbox, type, dividingProperty, false, geomType);
 	}
 
-	public SurfaceCount retrieveStats(Rectangle bbox, FeatureType type, String dividingProperty, String geomType) {
+	public Statistics retrieveStats(Rectangle bbox, FeatureType type, String dividingProperty, String geomType) {
 		Rectangle extended = bbox.extendRectangle();
-		SurfaceCount sc = new SurfaceCount();
+		Statistics.Builder statisticsBuilder = Statistics.builder().dividingProperty(dividingProperty);
 
 		for (int lat = (int) extended.getMinLat(); lat < extended.getMaxLat(); lat++) {
 			for (int lon = (int) extended.getMinLon(); lon < extended.getMaxLon(); lon++) {
@@ -86,24 +87,24 @@ public class PiecedCachingManager implements LayerProvider {
 				if (bbox.edgePoint(lat, lon)) {
 					// we can't load the statistic of cache as this is an edgepoint
 					FeatureCollection found = loadAndCachePart(lat, lon, type, dividingProperty, false, geomType);
-					sc = sc.merge(found.clippedWith(bbox).calculateTotals(dividingProperty));
+					statisticsBuilder.add(found.clippedWith(bbox).calculateTotals(dividingProperty));
 					continue;
 				}
 
 				DataCacheKey cacheKey = new DataCacheKey(type, searched);
 				if (statsCache.containsKey(cacheKey)) {
 					// statistics are in cache!
-					SurfaceCount found = statsCache.get(cacheKey);
-					sc = sc.merge(found);
+					Statistics found = statsCache.get(cacheKey);
+					statisticsBuilder.add(found);
 					continue;
 				}
 
 				// statistics are not in the cache yet
 				FeatureCollection found = loadAndCachePart(lat, lon, type, dividingProperty, false, geomType);
-				sc = sc.merge(found.calculateTotals(dividingProperty));
+				statisticsBuilder.add(found.calculateTotals(dividingProperty));
 			}
 		}
-		return sc;
+		return statisticsBuilder.build();
 	}
 
 	/**
@@ -174,7 +175,7 @@ public class PiecedCachingManager implements LayerProvider {
 			// caching file might have gotten corrupted and might have returned null
 			found = nonCacheProvider.getFeatures(key.getGrid(), type);
 			dataCache.put(key, found);
-			SurfaceCount stats = null;
+			Statistics stats = null;
 			if (geomType.equals("polygon") || geomType.equals("point")) {
 				stats = found.calculateTotals(dividingProperty);
 				statsCache.put(key, stats);
