@@ -1,10 +1,12 @@
 package be.vliz.emodnet.querytool.core.model;
 
 import be.vliz.emodnet.querytool.core.model.feature.Rectangle;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class FeatureType implements Serializable {
@@ -14,9 +16,10 @@ public class FeatureType implements Serializable {
 	private String name;
 	private String title;
 	private String abstractText;
-	private List<String> keywords;
+	private ImmutableList<String> keywords;
 	private String defaultSrs;
 	private Rectangle bbox;
+	private ImmutableMap<String,String> properties;
 
 	public FeatureType(Layer layer,String name, String title, String abstractText) {
 		this.layer = layer;
@@ -50,11 +53,11 @@ public class FeatureType implements Serializable {
 	}
 
 	public List<String> getKeywords() {
-		return keywords != null ? Collections.unmodifiableList(keywords) : null;
+		return keywords;
 	}
 
 	public void setKeywords(List<String> keywords) {
-		this.keywords = keywords;
+		this.keywords = ImmutableList.copyOf(keywords);
 	}
 
 	public String getDefaultSrs() {
@@ -77,7 +80,15 @@ public class FeatureType implements Serializable {
 		return layer;
 	}
 
-	@Override
+  public Map<String, String> getProperties() {
+    return properties;
+  }
+
+  public void setProperties(Map<String, String> properties) {
+    this.properties = ImmutableMap.copyOf(properties);
+  }
+
+  @Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
