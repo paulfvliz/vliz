@@ -50,6 +50,7 @@ public class Layer implements Serializable{
 		Map<String,String> params = new HashMap<>(this.defaultParams);
 		params.putAll(parameters);
 		String url = UriTemplate.resolveTemplateValues(UriComponent.Type.QUERY, this.url, true, params);
+		url = url.replaceAll("([^&?]*)=(?:&|$)",""); // remove empty parameters
 		return url;
 	}
 
