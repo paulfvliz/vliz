@@ -75,7 +75,7 @@ public class Statistics implements Serializable {
         return this;
 
       Map<String, Object> m = f.getProperties();
-      String name = (String) m.get(dividingProperty); // used "AllcombD" previously
+      String name = m.get(dividingProperty).toString(); // used "AllcombD" previously
       Statistic.Builder s = statistics.getOrDefault(name, Statistic.builder().name(name));
       s.add(f);
 
