@@ -21,7 +21,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
@@ -156,7 +155,7 @@ public class RemoteFeatureTypeDaoImpl extends AbstractFeatureTypeDao {
 
     @Override
     public void serialize(FeatureType object, ObjectWriter writer, Context ctx) throws Exception {
-      throw new NotImplementedException();
+      throw new NoSuchMethodException();
     }
 
     @Override
