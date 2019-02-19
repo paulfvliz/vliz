@@ -1,7 +1,5 @@
 package be.vliz.emodnet.querytool.core.model;
 
-import com.sun.xml.internal.txw2.annotation.XmlElement;
-
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
