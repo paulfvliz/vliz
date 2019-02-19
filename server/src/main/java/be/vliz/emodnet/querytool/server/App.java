@@ -1,6 +1,9 @@
 package be.vliz.emodnet.querytool.server;
 
 import be.vliz.emodnet.querytool.core.dao.*;
+import com.owlike.genson.Genson;
+import com.owlike.genson.GensonBuilder;
+import com.owlike.genson.ext.jaxrs.GensonJaxRSFeature;
 import org.ehcache.CacheManager;
 import org.ehcache.config.builders.CacheManagerBuilder;
 import org.ehcache.xml.XmlConfiguration;
@@ -77,6 +80,12 @@ public class App extends ResourceConfig {
                 }
             }
         });
+      Genson myGenson = new GensonBuilder()
+        .useRuntimeType(true)
+        .create();
+      register(new GensonJaxRSFeature()
+        .use(myGenson)
+      );
     }
 
     @PreDestroy

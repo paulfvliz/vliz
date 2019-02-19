@@ -30,29 +30,29 @@ public class StatisticPropertyTest {
 	@Test
 	public void testCollectNumber() {
 		Integer value = 5;
-		StatisticProperty sp = builder.add(value).build(statistic);
+    NumbericStatisticProperty sp = (NumbericStatisticProperty)builder.add(value, null).build(statistic);
 		assertThat(sp.getTotal(), closeTo(value.doubleValue(), 0.000001));
 	}
 
 	@Test
 	public void testCollectNonNumber() {
-		builder.add("hh");
-		thrown.expect(IllegalStateException.class);
-		builder.build(statistic);
+		builder.add("hh", null);
+		//thrown.expect(IllegalStateException.class);
+    assertThat(((DistinctCountStatisticProperty)builder.build(statistic)).getDistinctCounts().size(), greaterThan(0));
 	}
 
 	@Test
 	public void testGetMin() {
 		Integer value = 5;
-		builder.add(value).add(value * 2);
-		assertThat(builder.build(statistic).getMin(), closeTo(value.doubleValue(), 0.000001));
+		builder.add(value, null).add(value * 2, null);
+		assertThat(((NumbericStatisticProperty)builder.build(statistic)).getMin(), closeTo(value.doubleValue(), 0.000001));
 	}
 
 	@Test
 	public void testGetMax() {
 		Integer value = 5;
-		builder.add(value).add(value * 2);
-		assertThat(builder.build(statistic).getMax(), closeTo(value.doubleValue() * 2.0d, 0.000001));
+		builder.add(value, null).add(value * 2, null);
+		assertThat(((NumbericStatisticProperty)builder.build(statistic)).getMax(), closeTo(value.doubleValue() * 2.0d, 0.000001));
 	}
 
 	@Test
@@ -60,9 +60,9 @@ public class StatisticPropertyTest {
 		Integer value = 5;
 		Integer it = 1000;
 		for (int i = 0; i < it; i++) {
-			builder.add(value);
+			builder.add(value, null);
 		}
-		assertThat(builder.build(statistic).getTotal(), closeTo(value.doubleValue() * it.doubleValue(), 0.000001));
+		assertThat(((NumbericStatisticProperty)builder.build(statistic)).getTotal(), closeTo(value.doubleValue() * it.doubleValue(), 0.000001));
 	}
 
 	@Test
@@ -70,24 +70,24 @@ public class StatisticPropertyTest {
 		Integer value = 5;
 		when(statistic.getTotal()).thenReturn(1000.0d);
 		for (int i = 0; i < statistic.getTotal(); i++) {
-			builder.add(value);
+			builder.add(value, null);
 		}
-		assertThat(builder.build(statistic).getAvg(), closeTo(value.doubleValue(), 0.000001));
+		assertThat(((NumbericStatisticProperty)builder.build(statistic)).getAvg(), closeTo(value.doubleValue(), 0.000001));
 	}
 
 	@Test
 	public void testValidity() {
 		assertFalse(builder.isValid());
 		builder
-			.add(4)
-			.add(5);
+			.add(4, null)
+			.add(5, null);
 		assertTrue(builder.isValid());
 	}
 
 	@Test
 	public void testValidityOneValue() {
 		assertThat(builder.isValid(), is(false));
-		assertThat(builder.add(1).isValid(), is(true));
+		assertThat(builder.add(1, null).isValid(), is(true));
 
 	}
 

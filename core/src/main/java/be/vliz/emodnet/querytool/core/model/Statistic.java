@@ -33,7 +33,7 @@ class Statistic implements Serializable {
   }
 
   public double getRatio() {
-    return this.total / parent.getTotal();
+    return parent.getArea()  > 0 ? this.total / parent.getArea() : this.total / parent.getTotal();
   }
 
   public Map<String, StatisticProperty> getProperties() {
@@ -90,7 +90,7 @@ class Statistic implements Serializable {
 
       f.getProperties().entrySet().forEach(entry -> {
         StatisticProperty.Builder spb = properties.getOrDefault(entry.getKey(), StatisticProperty.builder().name(entry.getKey()));
-        spb.add(entry.getValue());
+        spb.add(entry.getValue(), geo);
         properties.putIfAbsent(entry.getKey(), spb);
       });
       return this;
@@ -102,7 +102,7 @@ class Statistic implements Serializable {
         this.properties.merge(
           sp.getName(),
           spb,
-          (newValue, value) -> value.add(newValue));
+          (newValue, value) -> value.add(newValue, null));
       }
       increment(s.total);
       return this;

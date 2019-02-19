@@ -75,12 +75,25 @@ public class StatisticTest {
 		assertThat(statisticBuilder.build(statistics).getProperties(),  hasKey(propName));
 	}
 
+  @Test
+  public void testGetNonNumericProperties() {
+    String propName = "prop1";
+    when(feature.getProperties()).thenReturn(ImmutableMap.of(propName, "glue"));
+    statisticBuilder.add(feature);
+    assertThat(statisticBuilder.build(statistics).getProperties(),  hasKey(propName));
+  }
+
 	@Test
 	public void testGetPropertiesNull() {
 		String propName = "prop1";
-		when(feature.getProperties()).thenReturn(ImmutableMap.of(propName, "not a numberic value so not useful"));
+		String propVal = "not a numberic value";
+		when(feature.getProperties()).thenReturn(ImmutableMap.of(propName, propVal));
 		statisticBuilder.add(feature);
-		assertThat(statisticBuilder.build(statistics).getProperties().size(), is(0) );
+		Statistic statistic = statisticBuilder.build(statistics);
+		assertThat(statistic.getProperties(), hasKey(propName));
+		StatisticProperty statisticProperty = statistic.getProperties().get(propName);
+		assertThat(statisticProperty, instanceOf(DistinctCountStatisticProperty.class));
+		assertThat(((DistinctCountStatisticProperty)statisticProperty).getDistinctCounts().get(propVal), closeTo(1.0, 0.0001));
 	}
 
 	@Test

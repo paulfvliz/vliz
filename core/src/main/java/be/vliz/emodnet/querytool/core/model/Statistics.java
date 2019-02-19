@@ -15,14 +15,16 @@ public class Statistics implements Serializable {
   private final ImmutableMap<String, Statistic> statistics;
   private final String dividingProperty;
   private final Double total;
+  private final Double area;
 
-  private Statistics(String dividingProperty, final Map<String, Statistic.Builder> statistics) {
+  private Statistics(String dividingProperty, final Map<String, Statistic.Builder> statistics, final double area) {
     this.dividingProperty = dividingProperty;
     this.statistics = statistics.entrySet().stream().collect(ImmutableMap.toImmutableMap(
       e -> e.getKey(),
       e -> e.getValue().build(this)
     ));
     this.total = this.statistics.values().stream().mapToDouble(Statistic::getTotal).sum();
+    this.area = area;
   }
 
   public Map<String, Statistic> getStatistics() {
@@ -33,6 +35,10 @@ public class Statistics implements Serializable {
     return total;
   }
 
+  public Double getArea() {
+    return area;
+  }
+
   public static Builder builder() {
     return new Builder();
   }
@@ -40,6 +46,7 @@ public class Statistics implements Serializable {
   public static class Builder {
     private String dividingProperty;
     private Map<String, Statistic.Builder> statistics = new HashMap<>();
+    private Double area = 0.0d;
 
     private Builder() {
     }
@@ -50,7 +57,12 @@ public class Statistics implements Serializable {
     }
 
     public Statistics build() {
-      return new Statistics(dividingProperty, statistics);
+      return new Statistics(dividingProperty, statistics, area);
+    }
+
+    public Builder area(Double area) {
+      this.area = area;
+      return this;
     }
 
     public Builder of(Statistics s) {

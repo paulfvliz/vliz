@@ -120,6 +120,11 @@ public class RemoteFeatureTypeDaoImpl extends AbstractFeatureTypeDao {
 
     DocumentBuilder documentBuilder = this.documentBuilderFactory.newDocumentBuilder();
     Document doc = documentBuilder.parse(response.getEntity().getContent());
+
+    // if we cannot get the properties we'll just have to do without
+    if (doc.getDocumentElement().getNodeName().contains("Exception")) {
+      return types;
+    }
     xpath.setNamespaceContext(new NamespaceResolver(doc));
     NodeList typeNodes = (NodeList) xpath.evaluate("/xsd:schema/xsd:element", doc, XPathConstants.NODESET);
     for (int i = 0; i < typeNodes.getLength(); i++) {

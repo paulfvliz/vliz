@@ -77,7 +77,9 @@ public class PiecedCachingManager implements LayerProvider {
 
 	public Statistics retrieveStats(Rectangle bbox, FeatureType type, String dividingProperty, String geomType) {
 		Rectangle extended = bbox.extendRectangle();
-		Statistics.Builder statisticsBuilder = Statistics.builder().dividingProperty(dividingProperty);
+		Statistics.Builder statisticsBuilder = Statistics.builder()
+      .dividingProperty(dividingProperty)
+      .area(bbox.surfaceArea());
 
 		for (int lat = (int) extended.getMinLat(); lat < extended.getMaxLat(); lat++) {
 			for (int lon = (int) extended.getMinLon(); lon < extended.getMaxLon(); lon++) {

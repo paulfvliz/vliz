@@ -31,7 +31,7 @@
 
     <cache alias="featureData" uses-template="dataCacheTemplate"/>
     <cache alias="featureStats" uses-template="dataCacheTemplate">
-        <value-type>be.vliz.emodnet.querytool.core.model.feature.SurfaceCount</value-type>
+      <value-type>be.vliz.emodnet.querytool.core.model.Statistics</value-type>
     </cache>
 
 </config>
