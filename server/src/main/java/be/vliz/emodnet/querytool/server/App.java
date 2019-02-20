@@ -81,6 +81,7 @@ public class App extends ResourceConfig {
             }
         });
       Genson myGenson = new GensonBuilder()
+        .setHtmlSafe(true)
         .useRuntimeType(true)
         .create();
       register(new GensonJaxRSFeature()

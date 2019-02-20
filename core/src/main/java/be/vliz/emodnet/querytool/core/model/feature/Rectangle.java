@@ -48,7 +48,7 @@ public class Rectangle extends Geometry {
 
 	@Override
 	public double surfaceArea() {
-		return (maxLat - minLat) * (maxLon - minLon);
+		return asPolygon().surfaceArea();
 	}
 
 	@Override

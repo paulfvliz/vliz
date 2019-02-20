@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.owlike.genson.Genson;
+import com.owlike.genson.GensonBuilder;
 
 public class Feature implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private static final String type = "Feature";
+	private static final Genson genson = new GensonBuilder().setHtmlSafe(true).create();
 	
 	private Point[] bbox = new Point[2];
 	private Geometry geometry;
@@ -80,7 +82,7 @@ public class Feature implements Serializable {
 			sb.append("\"geometry\": null");
 		}
 		sb.append(", \"properties\": ");
-		sb.append(new Genson().serialize(properties) + "}");
+		sb.append(genson.serialize(properties) + "}");
 		return sb.toString();
 	}
 

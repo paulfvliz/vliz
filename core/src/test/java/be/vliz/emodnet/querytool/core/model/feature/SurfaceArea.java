@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertThat;
+import static  org.hamcrest.Matchers.*;
 
 public class SurfaceArea {
 
@@ -33,5 +35,28 @@ public class SurfaceArea {
 		// https://geographiclib.sourceforge.io/cgi-bin/Planimeter 
 		// polygon & rhumb line, our calculation(using leaflets algorithm) is 109438 theirs is 109450, close enough
 	}
+
+	@Test
+	public void testRectangle() {
+	  double minLat = 52.0;
+	  double maxLat = 53.0;
+	  double minLon = -3.0;
+	  double maxLon = -2.0;
+    Point  p0 = new Point(minLat, minLon);
+    Point  p1 = new Point(minLat, maxLon);
+    Point  p2 = new Point(maxLat, maxLon);
+    Point  p3 = new Point(maxLat, minLon);
+    List<Point> listp = new ArrayList<Point>();
+    listp.add(p0);
+    listp.add(p1);
+    listp.add(p2);
+    listp.add(p3);
+
+    Polygon poly = new Polygon(p0, p1, p2,p3);
+
+    Rectangle r = new Rectangle(minLat, minLon, maxLat, maxLon);
+
+    assertThat(r.surfaceArea(), closeTo(poly.surfaceArea(), 0.1));
+  }
 
 }
