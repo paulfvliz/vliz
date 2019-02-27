@@ -11,6 +11,7 @@ import java.util.Objects;
 
 public class FeatureType implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final String DEFAULT_FILTER = "1=1";
 
 	private final Layer layer;
 	private String name;
@@ -20,6 +21,7 @@ public class FeatureType implements Serializable {
 	private String defaultSrs;
 	private Rectangle bbox;
 	private ImmutableMap<String,String> properties;
+	private String filter = DEFAULT_FILTER;
 
 	public FeatureType(Layer layer,String name, String title, String abstractText) {
 		this.layer = layer;
@@ -88,6 +90,14 @@ public class FeatureType implements Serializable {
     this.properties = ImmutableMap.copyOf(properties);
   }
 
+  public String getFilter() {
+    return filter;
+  }
+
+  public void setFilter(String filter) {
+    this.filter = filter;
+  }
+
   @Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -99,11 +109,13 @@ public class FeatureType implements Serializable {
 				Objects.equals(abstractText, that.abstractText) &&
 				Objects.equals(keywords, that.keywords) &&
 				Objects.equals(defaultSrs, that.defaultSrs) &&
-				Objects.equals(bbox, that.bbox);
+				Objects.equals(bbox, that.bbox) &&
+        Objects.equals(filter, that.filter);
+
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(layer, name, title, abstractText, keywords, defaultSrs, bbox);
+		return Objects.hash(layer, name, title, abstractText, keywords, defaultSrs, bbox, filter);
 	}
 }

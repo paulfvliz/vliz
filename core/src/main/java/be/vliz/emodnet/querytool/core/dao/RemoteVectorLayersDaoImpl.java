@@ -121,8 +121,10 @@ public class RemoteVectorLayersDaoImpl implements Serializable, VectorLayersDao 
 	private String getFormattedURL(Rectangle bbox, FeatureType type, String requestType) {
 		Map<String,String> props = new HashMap<String, String>();
     props.put("bbox", Util.rectangleToBBoxString(bbox));
+    props.put("cql_bbox", Util.rectangleToBBoxString(bbox, true));
     props.put(Layer.PARAM_TYPE, type.getName());
     props.put(Layer.PARAM_REQ_TYPE, requestType);
+    props.put(Layer.PARAM_FILTER, type.getFilter());
 		return type.getLayer().resolveUrl(props);
 	}
 

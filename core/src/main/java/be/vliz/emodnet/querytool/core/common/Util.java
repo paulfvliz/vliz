@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -75,6 +76,20 @@ public class Util {
 
 	private static final String DEFAULT_PROJECTION = "urn:ogc:def:crs:EPSG::4326";
 	public static String rectangleToBBoxString(Rectangle bbox) {
-		return Joiner.on(",").join(bbox.getMinLat(),bbox.getMinLon(),bbox.getMaxLat(),bbox.getMaxLon(), DEFAULT_PROJECTION);
+		return rectangleToBBoxString(bbox, false);
 	}
+
+	public static String rectangleToBBoxString(Rectangle bbox, boolean excludeProjection) {
+	  String[] a = new String[]{
+	    Double.toString(bbox.getMinLat()),
+      Double.toString(bbox.getMinLon()),
+      Double.toString(bbox.getMaxLat()),
+      Double.toString(bbox.getMaxLon()),
+      DEFAULT_PROJECTION};
+	  if (excludeProjection) {
+	    a = Arrays.copyOf(a, 4);
+    }
+
+    return Joiner.on(",").join(a);
+  }
 }

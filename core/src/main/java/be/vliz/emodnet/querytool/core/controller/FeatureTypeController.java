@@ -96,9 +96,15 @@ public class FeatureTypeController {
 						   @QueryParam("lonmax") double lonmax,
 						   @QueryParam("dividingProperty") String divider,
 						   @QueryParam("cacheOnly") @DefaultValue("false") boolean isCacheOnly,
-						   @QueryParam("geomType") @DefaultValue("polygon") String geomType) {
+						   @QueryParam("geomType") @DefaultValue("polygon") String geomType,
+               @QueryParam("filter") String filter)
+  {
 
 		FeatureType featureType = getFeature(layerName, featureName);
+		if (filter != null && !filter.isEmpty()) {
+      featureType.setFilter(filter);
+    }
+
 		FeatureCollection fc = layerProvider.retrieve(
 				new Rectangle(latmin, lonmin, latmax, lonmax),
 				featureType,

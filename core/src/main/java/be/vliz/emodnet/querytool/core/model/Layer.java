@@ -15,6 +15,8 @@ public class Layer implements Serializable{
 
 	public static final String PARAM_TYPE = "type";
 	public static final String PARAM_REQ_TYPE = "requestType";
+	public static final String PARAM_FILTER = "filter";
+
 	private static final String DEFAULT_REQUEST_TYPE = "getFeatures";
 
 	private final String name;
@@ -38,7 +40,9 @@ public class Layer implements Serializable{
 			{
 			put(PARAM_TYPE, defaultType);
 			put(PARAM_REQ_TYPE, DEFAULT_REQUEST_TYPE);
+			put(PARAM_FILTER, "1=1");
 			put("bbox", Util.rectangleToBBoxString(bbox));
+			put("cql_bbox", Util.rectangleToBBoxString(bbox, true));
 		}};
 	}
 
