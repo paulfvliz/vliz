@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @XmlTransient
@@ -77,12 +78,14 @@ abstract class StatisticProperty implements Serializable {
         try {
           addNumber(Double.parseDouble((String) property));
         } catch (NumberFormatException e) {
-          double incr = geo == null || "Point".equals(geo.getType())  ? 1.0d : geo.surfaceArea();
+          double incr = geo == null || "Point".equals(geo.getType()) ? 1.0d : geo.surfaceArea();
           this.distinctValueCounter.put(
             property.toString(),
             this.distinctValueCounter.getOrDefault(property.toString(), 0.0d) + incr
           );
         }
+      } else if (property instanceof List) {
+        // noop
       } else {
         throw new RuntimeException("No handler for type " + property.getClass().toString());
       }
