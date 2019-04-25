@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableMap;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class Statistics implements Serializable {
@@ -87,6 +88,9 @@ public class Statistics implements Serializable {
         return this;
 
       Map<String, Object> m = f.getProperties();
+      if (!m.containsKey(dividingProperty)) {
+        throw new NoSuchElementException("Unknown property '" + dividingProperty + "'. Try one of these " + m.keySet());
+      }
       String name = m.get(dividingProperty).toString(); // used "AllcombD" previously
       Statistic.Builder s = statistics.getOrDefault(name, Statistic.builder().name(name));
       s.add(f);

@@ -73,7 +73,7 @@ class Statistic implements Serializable {
     }
 
     Builder name(String name) {
-      this.name = name;
+      this.name = name.replaceAll("\"", "'"); // replacing quotes with single quotes because of a bug in Genson string escaping
       return this;
     }
 

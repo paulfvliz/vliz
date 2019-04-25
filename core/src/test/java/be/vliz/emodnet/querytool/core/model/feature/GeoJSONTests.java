@@ -35,5 +35,14 @@ public class GeoJSONTests {
 		
 	}
 
+	@Test
+  public void testJSONEscaping() throws Exception {
+	  Feature f = new Feature();
+	  f.addProperty("bla", "0\"0\"");
+
+    String expected = "{ \"type\": \"Feature\", \"geometry\": null, \"properties\": { \"bla\": \"0\\\"0\\\"\"}}";
+    JSONAssert.assertEquals(expected, f.toGeoJSON(), true);
+  }
+
 }
 

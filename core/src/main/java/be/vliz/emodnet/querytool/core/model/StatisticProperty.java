@@ -61,7 +61,7 @@ abstract class StatisticProperty implements Serializable {
     }
 
     Builder name(String name) {
-      this.name = name;
+      this.name = name.replaceAll("\"", "'"); // replacing quotes with single quotes because of a bug in Genson string escaping
       return this;
     }
 
@@ -78,10 +78,11 @@ abstract class StatisticProperty implements Serializable {
         try {
           addNumber(Double.parseDouble((String) property));
         } catch (NumberFormatException e) {
+          String propString = property.toString().replaceAll("\"", "'"); // replacing quotes with single quotes because of a bug in Genson string escaping
           double incr = geo == null || "Point".equals(geo.getType()) ? 1.0d : geo.surfaceArea();
           this.distinctValueCounter.put(
-            property.toString(),
-            this.distinctValueCounter.getOrDefault(property.toString(), 0.0d) + incr
+            propString,
+            this.distinctValueCounter.getOrDefault(propString, 0.0d) + incr
           );
         }
       } else if (property instanceof List) {

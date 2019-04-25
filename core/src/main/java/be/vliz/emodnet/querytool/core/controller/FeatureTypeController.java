@@ -75,13 +75,18 @@ public class FeatureTypeController {
 			@QueryParam("geomType") @DefaultValue("polygon") String geomType) {
 
 		FeatureType featureType = getFeature(layerName, featureName);
-		Statistics statistics =  layerProvider.retrieveStats(
-				new Rectangle(latmin, lonmin, latmax, lonmax),
-				featureType,
-				divider == null ? featureType.getLayer().getDefaultDividor() : divider,
-				geomType);
+		try {
+      Statistics statistics = layerProvider.retrieveStats(
+        new Rectangle(latmin, lonmin, latmax, lonmax),
+        featureType,
+        divider == null ? featureType.getLayer().getDefaultDividor() : divider,
+        geomType);
 
-		return statistics;
+      return statistics;
+    } catch (NoSuchElementException e ) {
+		  throw new WebApplicationException(e.getMessage(),
+        Response.status(Response.Status.BAD_REQUEST.getStatusCode(), e.getMessage()).build());
+    }
 	}
 
 	@Path("data")
